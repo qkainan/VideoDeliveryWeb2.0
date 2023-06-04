@@ -7,7 +7,10 @@ import com.feidian.responseResult.ResponseResult;
 import com.feidian.service.UserService;
 import com.feidian.util.AESUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 
 import static com.feidian.enums.HttpCodeEnum.SYSTEM_ERROR;
 
@@ -15,8 +18,16 @@ import static com.feidian.enums.HttpCodeEnum.SYSTEM_ERROR;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
+
+
+    @Transactional
     @Override
     public ResponseResult fastSignup(SignupDTO signupDTO) {
+        //Todo 校验密码是否符合强度要求
+        // 1.只能包含英文字母、阿拉伯数字和下划线
+        // 2.密码长度在8到25之间
+        // 3.再次输入密码需与第一次输入的密码一致
+        // 4.加密密码
         String regexPwd = "\\w{8,25}";
 
         if (signupDTO.getPassword().matches(regexPwd) == false) {
