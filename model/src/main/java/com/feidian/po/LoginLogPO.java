@@ -9,20 +9,14 @@ import org.springframework.stereotype.Component;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Commodity {
+public class LoginLogPO {
 
   private long id;
-  private long userId;
+  private String username;
+  private long status;
+  private String msg;
 
-  private String commodityName;
-  private String commodityType;
-  private double price;
-  private String commodityDescription;
-  private String commodityAddress;
-  private String coverUrl;
-
-  private long commodityStatus;
-
+  private java.sql.Timestamp accessTime;
   private java.sql.Timestamp createTime;
   private java.sql.Timestamp updateTime;
   private long isDeleted;

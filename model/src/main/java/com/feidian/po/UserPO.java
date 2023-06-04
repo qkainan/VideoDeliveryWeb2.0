@@ -9,17 +9,20 @@ import org.springframework.stereotype.Component;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderCommodity {
+public class UserPO {
 
   private long id;
-  private long orderId;
-  private long commodityId;
-  private double commodityNum;
+  private String username;
+  private String password;
+  private String phone;
+  private String headUrl;
+  private String userDescription;
+  private String emailAddress;
+  private long userStatus;
 
   private java.sql.Timestamp createTime;
   private java.sql.Timestamp updateTime;
   private long isDeleted;
-
 
 
 }

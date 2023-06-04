@@ -9,14 +9,16 @@ import org.springframework.stereotype.Component;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class LoginLog {
+public class CartPO {
 
   private long id;
-  private String username;
-  private long status;
-  private String msg;
+  private long userId;
+  private long commodityId;
+  private long addressId;
+  private double commodityNum;
 
-  private java.sql.Timestamp accessTime;
+  private long orderStatus;
+
   private java.sql.Timestamp createTime;
   private java.sql.Timestamp updateTime;
   private long isDeleted;

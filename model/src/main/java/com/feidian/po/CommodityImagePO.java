@@ -9,17 +9,18 @@ import org.springframework.stereotype.Component;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Address {
+public class CommodityImagePO {
 
   private long id;
-  private long userId;
-  private String addressName;
+  private long commodityId;
 
-  private long addressStatus;
+  private String imageUrl;
+  private long imageStatus;
 
   private java.sql.Timestamp createTime;
   private java.sql.Timestamp updateTime;
   private long isDeleted;
+
 
 
 }

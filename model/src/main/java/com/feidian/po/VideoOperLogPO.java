@@ -9,17 +9,23 @@ import org.springframework.stereotype.Component;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Order {
+public class VideoOperLogPO {
 
   private long id;
-  private long buyerId;
-  private long sellerId;
-  private String addressName;
-  private long orderStatus;
+  private String businessType;
+  private String method;
+  private String requestMethod;
+  private String operUsername;
+  private String operUrl;
+  private String operIp;
+  private String operParam;
+  private String jsonResult;
+  private long status;
+  private String errorMsg;
 
+  private java.sql.Timestamp operTime;
   private java.sql.Timestamp createTime;
   private java.sql.Timestamp updateTime;
   private long isDeleted;
-
 
 }

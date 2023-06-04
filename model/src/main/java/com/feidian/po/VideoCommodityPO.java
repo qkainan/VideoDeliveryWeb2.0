@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class VideoCommodity {
+public class VideoCommodityPO {
 
   private long id;
   private long userId;

@@ -9,20 +9,20 @@ import org.springframework.stereotype.Component;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CommodityOperLog {
+public class CommodityPO {
 
   private long id;
-  private String businessType;
-  private String method;
-  private String requestMethod;
-  private String operUserename;
-  private String operUrl;
-  private String operParam;
-  private String jsonResult;
-  private long status;
-  private String errorMsg;
+  private long userId;
 
-  private java.sql.Timestamp operTime;
+  private String commodityName;
+  private String commodityType;
+  private double price;
+  private String commodityDescription;
+  private String commodityAddress;
+  private String coverUrl;
+
+  private long commodityStatus;
+
   private java.sql.Timestamp createTime;
   private java.sql.Timestamp updateTime;
   private long isDeleted;
