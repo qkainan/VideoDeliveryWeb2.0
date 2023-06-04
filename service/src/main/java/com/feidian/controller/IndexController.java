@@ -38,5 +38,13 @@ public class IndexController {
         return utilService.sendVerifyCode(signupDTO.getEmailAddress(), signupDTO.getUsername());
     }
 
+    //邮箱注册
+    //邮箱注册
+    @Transactional
+    @PostMapping("/postEmailSignup")
+    public ResponseResult emailSignup(@RequestBody SignupDTO signupDTO) throws Exception {
+        //Todo 规范性验证放在Controller层，业务性验证放在Service层
+        return userService.emailSignup(signupDTO);
+    }
 
 }
