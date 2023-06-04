@@ -14,10 +14,13 @@ public class UserPO {
   private long id;
   private String username;
   private String password;
+  private String nickname;
+
   private String phone;
   private String headUrl;
   private String userDescription;
   private String emailAddress;
+
   private long userStatus;
 
   private java.sql.Timestamp createTime;
