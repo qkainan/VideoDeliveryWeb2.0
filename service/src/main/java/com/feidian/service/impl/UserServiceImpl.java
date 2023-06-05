@@ -57,6 +57,7 @@ public class UserServiceImpl implements UserService {
         return ResponseResult.successResult(200, "快速注册成功");
     }
 
+    @Transactional
     @Override
     public ResponseResult emailSignup(SignupDTO signupDTO) {
         //Todo 校验密码是否符合强度要求

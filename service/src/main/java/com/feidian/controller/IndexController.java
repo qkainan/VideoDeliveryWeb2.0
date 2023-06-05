@@ -1,5 +1,6 @@
 package com.feidian.controller;
 
+import com.feidian.dto.LoginDTO;
 import com.feidian.dto.SignupDTO;
 import com.feidian.po.UserPO;
 import com.feidian.responseResult.ResponseResult;
@@ -10,9 +11,14 @@ import com.feidian.util.EmailUtil;
 import com.feidian.util.VerifyCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 @RestController
 public class IndexController {
@@ -32,14 +38,12 @@ public class IndexController {
     }
 
     //发送验证码
-    @Transactional
     @PostMapping("/sendVerifyCode")
     public ResponseResult sendVerifyCode(@RequestBody SignupDTO signupDTO) {
         return utilService.sendVerifyCode(signupDTO.getEmailAddress(), signupDTO.getUsername());
     }
 
     //邮箱注册
-    @Transactional
     @PostMapping("/emailSignup")
     public ResponseResult emailSignup(@RequestBody SignupDTO signupDTO) throws Exception {
         //Todo 规范性验证放在Controller层，业务性验证放在Service层
@@ -47,6 +51,9 @@ public class IndexController {
     }
 
     //登录
+
+
+
 
 
 }
