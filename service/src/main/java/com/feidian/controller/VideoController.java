@@ -3,6 +3,7 @@ package com.feidian.controller;
 import com.feidian.bo.VideoBO;
 import com.feidian.dto.VideoDTO;
 
+import com.feidian.po.VideoCommodityPO;
 import com.feidian.po.VideoPO;
 import com.feidian.responseResult.ResponseResult;
 import com.feidian.service.CommodityService;
@@ -11,7 +12,7 @@ import com.feidian.service.VideoCommodityService;
 import com.feidian.service.VideoService;
 
 
-
+import com.feidian.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -55,8 +56,23 @@ public class VideoController {
         return videoService.updateVideoInfo(videoDTO);
     }
 
+    @PostMapping ("/deleteVideo")
+    public ResponseResult deleteVideo(long videoId){
+        return videoService.deleteVideo(videoId);
+    }
 
-//    @Transactional
+    //给视频添加推荐商品
+    @PostMapping("/uploadVideoCommodity")
+    public ResponseResult uploadVideoCommodity(@RequestBody VideoDTO videoDTO){
+        return videoCommodityService.uploadVideoCommodity(videoDTO);
+    }
+
+    //更改商品的推荐商品
+    @PutMapping("/updateVideoCommodityInfo")
+    public ResponseResult putUpdateVideoCommodityMsg(@RequestBody VideoDTO videoDTO){
+        return videoCommodityService.updateVideoCommodityInfo(videoDTO);
+    }
+
 //    @GetMapping("/getHomeRecommend")
 //    public ResponseResult homeRecommend() throws IOException, URISyntaxException {
 //        List<VideoPO> list = new ArrayList<>();
@@ -75,45 +91,6 @@ public class VideoController {
 //        }
 //        return new ResponseResult(200, "操作成功",map);
 //    }
-
-
-//
-//
-//
-//    @Transactional
-//    @PostMapping("/postUploadVideoCommodity")
-//    public ResponseResult postUploadVideoCommodity(@RequestBody VideoDTO videoDTO){
-//        long userId = JwtUtil.getUserId();
-//        VideoPO videoPO = videoService.findByVideoId(videoDTO.getVideoId());
-//
-//        //将商品安排到video推荐商品里
-//        for (long cId : videoDTO.getCommodityIdList()) {
-//            VideoCommodityPO videoCommodityPO = new VideoCommodityPO(userId, videoDTO.getVideoId(), cId,
-//                    videoPO.getVideoStatus());
-//            videoCommodityService.insertVideoCommodity(videoCommodityPO);
-//        }
-//
-//        return new ResponseResult(200,"操作成功");
-//    }
-//
-//    @Transactional
-//    @PostMapping ("/postDeleteVideo")
-//    public ResponseResult deleteVideo(long videoId){
-//        videoService.deleteVideo(videoId);
-//        return new ResponseResult(200, "操作成功");
-//    }
-//
-//    @Transactional
-//    @PutMapping("/putUpdateVideoCommodityMsg")
-//    public ResponseResult putUpdateVideoCommodityMsg(@RequestBody VideoDTO videoDTO){
-//
-//        for (Long cId:videoDTO.getCommodityIdList()) {
-//            VideoCommodityPO videoCommodityPO = new VideoCommodityPO(videoDTO.getVideoId(),cId);
-//            videoCommodityService.updateVideoCommodityMsg(videoCommodityPO);
-//        }
-//        return new ResponseResult(200,"操作成功");
-//    }
-
 
 
 }

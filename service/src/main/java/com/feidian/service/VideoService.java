@@ -29,4 +29,8 @@ public interface VideoService {
     ResponseResult displayVideo(long id) throws IOException, URISyntaxException;
 
     ResponseResult updateVideoInfo(VideoDTO videoDTO);
+
+    ResponseResult deleteVideo(long videoId);
+
+
 }

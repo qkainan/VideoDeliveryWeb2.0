@@ -1,6 +1,7 @@
 package com.feidian.service.impl;
 
 import com.feidian.bo.VideoBO;
+import com.feidian.bo.VideoCommodityBO;
 import com.feidian.dto.VideoDTO;
 import com.feidian.mapper.CommodityMapper;
 import com.feidian.mapper.UserMapper;
@@ -99,11 +100,20 @@ public class VideoServiceImpl implements VideoService {
     @Transactional
     @Override
     public ResponseResult updateVideoInfo(VideoDTO videoDTO) {
-        VideoBO videoBO = new VideoBO(videoDTO.getId(),videoDTO.getVideoTitle(), videoDTO.getVideoType(),
+        VideoBO videoBO = new VideoBO(videoDTO.getVideoId(),videoDTO.getVideoTitle(), videoDTO.getVideoType(),
                 videoDTO.getVideoDescription());
         videoMapper.updateVideoInfo(videoBO);
         return ResponseResult.successResult();
     }
+
+    @Transactional
+    @Override
+    public ResponseResult deleteVideo(long videoId) {
+        videoMapper.deleteVideo(videoId);
+        return ResponseResult.successResult();
+    }
+
+
 
     public VideoPO findByVideoId(long id){
         return videoMapper.findByVideoId(id);

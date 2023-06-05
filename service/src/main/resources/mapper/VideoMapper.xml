@@ -22,8 +22,14 @@
                 video_description = #{videoDescription},
             </if>
         </set>
-        WHERE id = #{id};
+        WHERE id = #{videoId};
     </update>
+    <update id="deleteVideo">
+        UPDATE user
+        SET is_deleted = ${1}
+        WHERE id = #{videoId};
+    </update>
+
 
 
     <select id="findByVideoId" resultType="com.feidian.po.VideoPO">

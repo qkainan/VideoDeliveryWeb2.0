@@ -18,6 +18,8 @@ public interface VideoMapper {
 
     void updateVideoInfo(VideoBO videoBO);
 
+    void deleteVideo(long videoId);
+
 
     // void deleteVideo(long videoId);
 
