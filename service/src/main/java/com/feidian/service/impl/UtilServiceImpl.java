@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import static com.feidian.enums.HttpCodeEnum.REQUIRE_USERNAME;
+
 @Service
 public class UtilServiceImpl implements UtilService {
 
@@ -16,6 +18,9 @@ public class UtilServiceImpl implements UtilService {
 
     @Override
     public ResponseResult sendVerifyCode(String emailAddress, String label) {
+        if (label == null){
+            return ResponseResult.errorResult(REQUIRE_USERNAME);
+        }
         String regexEmailAddress = "\\w+@[\\w&&[^_]]{2,7}(\\.[a-zA-Z]{2,4}){1,3}";
         String verifyCode = new VerifyCode().setVerifyCode();
 

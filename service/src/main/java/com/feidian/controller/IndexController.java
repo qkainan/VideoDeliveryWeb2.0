@@ -39,12 +39,14 @@ public class IndexController {
     }
 
     //邮箱注册
-    //邮箱注册
     @Transactional
-    @PostMapping("/postEmailSignup")
+    @PostMapping("/emailSignup")
     public ResponseResult emailSignup(@RequestBody SignupDTO signupDTO) throws Exception {
         //Todo 规范性验证放在Controller层，业务性验证放在Service层
         return userService.emailSignup(signupDTO);
     }
+
+    //登录
+
 
 }
