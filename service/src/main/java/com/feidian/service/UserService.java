@@ -1,5 +1,6 @@
 package com.feidian.service;
 
+import com.feidian.dto.LoginDTO;
 import com.feidian.dto.SignupDTO;
 import com.feidian.po.UserPO;
 import com.feidian.responseResult.ResponseResult;
@@ -9,5 +10,6 @@ public interface UserService {
 
     ResponseResult emailSignup(SignupDTO signupDTO);
 
-    UserPO findByName(String username);
+    ResponseResult login(LoginDTO loginDTO);
+
 }

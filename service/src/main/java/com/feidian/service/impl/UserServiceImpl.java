@@ -1,18 +1,25 @@
 package com.feidian.service.impl;
 
 import com.feidian.bo.UserBO;
+import com.feidian.dto.LoginDTO;
 import com.feidian.dto.SignupDTO;
 import com.feidian.mapper.UserMapper;
 import com.feidian.po.UserPO;
 import com.feidian.responseResult.ResponseResult;
 import com.feidian.service.UserService;
 import com.feidian.util.AESUtil;
+import com.feidian.util.JwtUtil;
 import com.feidian.util.VerifyCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 import static com.feidian.enums.HttpCodeEnum.REQUIRE_USERNAME;
 
@@ -100,8 +107,57 @@ public class UserServiceImpl implements UserService {
         return ResponseResult.successResult(200, "邮箱注册成功");
     }
 
-    @Transactional
     @Override
+    public ResponseResult login(LoginDTO loginDTO) {
+        if (loginDTO.getPassword().length() >16 && loginDTO.getPassword().length() <8 ) {
+            return ResponseResult.errorResult(403, "密码不符合要求");
+        }
+
+        //密码符合要求则开始验证
+        UserPO userPO = findByName(loginDTO.getUsername());
+        Long id01 = userPO.getId();
+        String username01 = userPO.getUsername();
+
+        if (!StringUtils.hasText(username01)) {
+            return ResponseResult.errorResult(403,"用户名不存在");
+        }
+
+        //验证密码是否正确
+        //补全用户输入的密码
+        String userPwd = "";
+        StringBuilder stringBuilder = new StringBuilder(loginDTO.getPassword());
+        if (16 > loginDTO.getPassword().length()){
+            for (int i = loginDTO.getPassword().length() ; i < 16; i++) {
+                stringBuilder = stringBuilder.append("=");
+            }
+        }
+        userPwd = stringBuilder.toString();
+
+        //获取解密后的密码
+        String decryptUserPwd = null;
+        try {
+            decryptUserPwd = AESUtil.decryptByAES(userPO.getPassword());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        if (!decryptUserPwd.equals(userPwd)) {
+            userPO.setUserStatus(1);
+            return ResponseResult.errorResult(403,"密码不正确");
+        }
+
+        //如果正确 生成token返回,并记录日志
+        Map<String, Object> map;
+        map = new HashMap<>();
+        String token = JwtUtil.createJWT(UUID.randomUUID().toString(), String.valueOf(id01), null);
+        map.put("Authorization", token);
+        userPO.setUserStatus(0);
+
+        return ResponseResult.successResult(map);
+    }
+
+
+    //根据用户名调出用户信息
     public UserPO findByName(String username) {
         return userMapper.findByName(username);
     }
