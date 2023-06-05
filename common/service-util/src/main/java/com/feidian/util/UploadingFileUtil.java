@@ -14,7 +14,7 @@ import java.nio.file.Paths;
 import java.util.Base64;
 
 //给前端返回文件时的工具
-public class fileUploadUtil {
+public class UploadingFileUtil {
 
     public static FileVO getFileVideo(String dataUrl) throws IOException {
         try {
