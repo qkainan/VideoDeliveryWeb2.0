@@ -14,5 +14,34 @@
         WHERE username = #{username};
     </select>
 
+    <select id="findById" resultType="com.feidian.po.UserPO">
+        SELECT id,
+               username,
+               password,
+               nickname,
+               phone,
+               head_url,
+               user_description,
+               email_address,
+               user_status,
+               create_time,
+               update_time,
+               is_deleted
+        FROM user
+        WHERE id = #{id};
+    </select>
+
+    <update id="updateUserInfo">
+        UPDATE user
+        <set>
+            <if test="headUrl!=null and headUrl!=''">
+                head_url = #{headUrl},
+            </if>
+            <if test="userDescription!=null and userDescription!=''">
+                user_description = #{userDescription},
+            </if>
+        </set>
+        WHERE id = #{id};
+    </update>
 
 </mapper>

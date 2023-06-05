@@ -13,4 +13,8 @@ public interface UserMapper {
     void insertUser(UserBO userBO);
 
     UserPO findByName(String username);
+
+    void updateUserInfo(UserBO userBO);
+
+    UserPO findById(long id);
 }

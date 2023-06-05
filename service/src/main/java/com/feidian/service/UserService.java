@@ -2,8 +2,9 @@ package com.feidian.service;
 
 import com.feidian.dto.LoginDTO;
 import com.feidian.dto.SignupDTO;
-import com.feidian.po.UserPO;
+import com.feidian.dto.UserDTO;
 import com.feidian.responseResult.ResponseResult;
+import org.springframework.web.multipart.MultipartFile;
 
 public interface UserService {
     ResponseResult fastSignup(SignupDTO signupDTO);
@@ -12,4 +13,7 @@ public interface UserService {
 
     ResponseResult login(LoginDTO loginDTO);
 
+    ResponseResult updateUserHead(MultipartFile headFile);
+
+    ResponseResult updateUserDescription(UserDTO userDTO);
 }

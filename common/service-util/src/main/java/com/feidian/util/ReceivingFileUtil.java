@@ -8,7 +8,8 @@ import java.util.UUID;
 
 public class ReceivingFileUtil {
 
-    public String saveFile(MultipartFile file, String uploadDir) {
+    public static String saveFile(MultipartFile file, String uploadDir) {
+
         if (file.isEmpty()) {
             return "未选择文件";
         }

@@ -3,18 +3,18 @@ package com.feidian.service.impl;
 import com.feidian.bo.UserBO;
 import com.feidian.dto.LoginDTO;
 import com.feidian.dto.SignupDTO;
+import com.feidian.dto.UserDTO;
 import com.feidian.mapper.UserMapper;
 import com.feidian.po.UserPO;
 import com.feidian.responseResult.ResponseResult;
 import com.feidian.service.UserService;
-import com.feidian.util.AESUtil;
-import com.feidian.util.JwtUtil;
-import com.feidian.util.VerifyCode;
+import com.feidian.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 
 import java.util.HashMap;
@@ -154,6 +154,33 @@ public class UserServiceImpl implements UserService {
         userPO.setUserStatus(0);
 
         return ResponseResult.successResult(map);
+    }
+
+    @Transactional
+    @Override
+    public ResponseResult updateUserHead(MultipartFile headFile) {
+        UserBO userBO = new UserBO();
+        userBO.setId(JwtUtil.getUserId());
+
+        //接收头像图片
+        String headUrl = "";
+        String uploadCommodityCoverDir = "D:/uploads/commodities/cover/";
+        ReceivingFileUtil.saveFile(headFile, uploadCommodityCoverDir);
+        headUrl = ReceivingFileUtil.saveFile(headFile, uploadCommodityCoverDir);
+        userBO.setHeadUrl(headUrl);
+
+        //更新数据库
+        userMapper.updateUserInfo(userBO);
+
+        return ResponseResult.successResult(200,"修改成功");
+    }
+
+    @Override
+    public ResponseResult updateUserDescription(UserDTO userDTO) {
+        userDTO.setId(JwtUtil.getUserId());
+        UserBO userBO = new UserBO(userDTO.getId(),userDTO.getUserDescription());
+        userMapper.updateUserInfo(userBO);
+        return ResponseResult.successResult(200,"更新个性签名成功");
     }
 
 

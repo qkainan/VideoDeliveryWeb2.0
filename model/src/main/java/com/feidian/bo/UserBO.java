@@ -14,15 +14,29 @@ public class UserBO {
     private long id;
     private String username;
     private String password;
-
     private String nickname;
     private String emailAddress;
 
-    public UserBO( String username, String password, String nickname, String emailAddress) {
+    private String phone;
+    private String headUrl;
+    private String userDescription;
+
+    public UserBO(String username, String password, String nickname, String emailAddress) {
         this.username = username;
         this.password = password;
         this.nickname = nickname;
         this.emailAddress = emailAddress;
+    }
+
+    public UserBO(long id, String headUrl, String userDescription){
+        this.id = id;
+        this.headUrl = headUrl;
+        this.userDescription = userDescription;
+    }
+
+    public UserBO(long id,String userDescription){
+        this.id = id;
+        this.userDescription = userDescription;
     }
 
 }
