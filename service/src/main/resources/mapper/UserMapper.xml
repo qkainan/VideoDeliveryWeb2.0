@@ -8,5 +8,11 @@
         VALUES (#{username}, #{password}, #{nickname}, #{emailAddress}, ${1})
     </insert>
 
+    <select id="findByName" resultType="com.feidian.po.UserPO">
+        SELECT id, username, password
+        FROM user
+        WHERE username = #{username};
+    </select>
+
 
 </mapper>

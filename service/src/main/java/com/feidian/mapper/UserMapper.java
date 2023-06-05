@@ -1,6 +1,8 @@
 package com.feidian.mapper;
 
 import com.feidian.bo.UserBO;
+import com.feidian.po.UserPO;
+import com.feidian.responseResult.ResponseResult;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -10,4 +12,5 @@ public interface UserMapper {
 
     void insertUser(UserBO userBO);
 
+    UserPO findByName(String username);
 }

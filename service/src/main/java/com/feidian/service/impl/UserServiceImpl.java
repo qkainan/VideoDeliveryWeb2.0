@@ -100,6 +100,12 @@ public class UserServiceImpl implements UserService {
         return ResponseResult.successResult(200, "邮箱注册成功");
     }
 
+    @Transactional
+    @Override
+    public UserPO findByName(String username) {
+        return userMapper.findByName(username);
+    }
+
     //加密用户密码
     public ResponseResult getEncryptUserPwd(String password) {
         String userPwd = "";
