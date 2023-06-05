@@ -1,14 +1,30 @@
 package com.feidian.service.impl;
 
+import com.feidian.bo.VideoBO;
+import com.feidian.dto.VideoDTO;
+import com.feidian.mapper.CommodityMapper;
+import com.feidian.mapper.UserMapper;
+import com.feidian.mapper.VideoCommodityMapper;
 import com.feidian.mapper.VideoMapper;
+import com.feidian.po.CommodityPO;
+import com.feidian.po.UserPO;
+import com.feidian.po.VideoCommodityPO;
 import com.feidian.po.VideoPO;
+import com.feidian.responseResult.ResponseResult;
 import com.feidian.service.VideoService;
-import org.apache.ibatis.annotations.Param;
+import com.feidian.util.JwtUtil;
+import com.feidian.util.ReceivingFileUtil;
+import com.feidian.util.UploadingFileUtil;
+import com.feidian.vo.DisplayVideoVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 @Service
 public class VideoServiceImpl implements VideoService {
@@ -16,47 +32,124 @@ public class VideoServiceImpl implements VideoService {
     @Autowired
     private VideoMapper videoMapper;
 
+    @Autowired
+    private UserMapper userMapper;
+
+    @Autowired
+    private VideoCommodityMapper videoCommodityMapper;
+
+    @Autowired
+    private CommodityMapper commodityMapper;
+
+    @Transactional
     @Override
-    public void insertVideo(VideoPO videoPO) {
-        videoMapper.insertVideo(videoPO);
+    public ResponseResult receivingVideo(VideoDTO receivingVideoDTO, MultipartFile dataFile, MultipartFile coverFile) {
+        long userId = JwtUtil.getUserId();
+
+        String videoDataUrl = "";
+        String videoCoverUrl = "";
+
+        //Todo 最好放在配置文件
+        // 定义保存路径
+        String uploadVideoCoverDir = "D:/uploads/videos/cover/";
+        ReceivingFileUtil.saveFile(coverFile,uploadVideoCoverDir);
+        videoCoverUrl = ReceivingFileUtil.saveFile(coverFile,uploadVideoCoverDir);
+        receivingVideoDTO.setCoverUrl(videoCoverUrl);
+
+        String uploadVideoDataDir = "D:/uploads/videos/data/";
+        ReceivingFileUtil.saveFile(dataFile,uploadVideoDataDir);
+        videoDataUrl = ReceivingFileUtil.saveFile(dataFile,uploadVideoDataDir);
+        receivingVideoDTO.setDataUrl(videoDataUrl);
+        receivingVideoDTO.setVideoName(dataFile.getOriginalFilename());
+        receivingVideoDTO.setVideoName(dataFile.getOriginalFilename());
+
+        receivingVideoDTO.setUserId(userId);
+
+        VideoBO videoBO = new VideoBO(receivingVideoDTO.getUserId(), receivingVideoDTO.getVideoName(),
+                receivingVideoDTO.getVideoTitle(), receivingVideoDTO.getVideoType(), receivingVideoDTO.getVideoDescription(),
+                receivingVideoDTO.getCoverUrl(), receivingVideoDTO.getDataUrl(),1);
+
+        videoMapper.insertVideo(videoBO);
+
+        return ResponseResult.successResult(200,"上传视频成功");
     }
 
     @Override
-    public long[] homeRecommend() {
+    public ResponseResult displayVideo(long id) throws IOException, URISyntaxException {
+        VideoPO videoPO = findByVideoId(id);
+        UserPO userPO = userMapper.findById(videoPO.getUserId());
 
-        //创建一个新的数组
-        long[] arr = new long[40];
-        //把随机数存入数组当中
-        Random r = new Random();
-        for (Integer i = 0; i < arr.length; i++) {
-            //每循环一次，就会生成一个随机数
-            Integer num = r.nextInt(40 + 1);
-            //把生成的随机数存入数组当中
-            arr[i] = num;
+        List<VideoCommodityPO> videoCommodityPOList = videoCommodityMapper.findByVideoId(id);
+        List<CommodityPO> commodityPOList = new ArrayList<>();
+
+        for (VideoCommodityPO vc: videoCommodityPOList) {
+            CommodityPO byCommodityIdPO = commodityMapper.findByCommodityId(vc.getCommodityId());
+            commodityPOList.add(byCommodityIdPO);
         }
 
-        return arr;
+        DisplayVideoVO displayVideoVo = new DisplayVideoVO(videoPO.getId(), videoPO.getVideoTitle(), userPO.getId(),
+                userPO.getUsername(), videoPO.getDataUrl(), videoPO.getCoverUrl(),
+                videoPO.getVideoDescription(), videoPO.getCreateTime(), commodityPOList,
+                UploadingFileUtil.getFileVideo(videoPO.getDataUrl()).getFileByte(),
+                UploadingFileUtil.getFileImage(videoPO.getCoverUrl()).getFileByte());
+
+        return ResponseResult.successResult(displayVideoVo);
     }
 
+    @Transactional
     @Override
-    public VideoPO findByVideoId(@Param("videoId") long videoId) {
-        return videoMapper.findByVideoId(videoId);
+    public ResponseResult updateVideoInfo(VideoDTO videoDTO) {
+        VideoBO videoBO = new VideoBO(videoDTO.getId(),videoDTO.getVideoTitle(), videoDTO.getVideoType(),
+                videoDTO.getVideoDescription());
+        videoMapper.updateVideoInfo(videoBO);
+        return ResponseResult.successResult();
     }
 
-    @Override
-    public List<VideoPO> findByUserId(long userId) {
-        return videoMapper.findByUserId(userId);
+    public VideoPO findByVideoId(long id){
+        return videoMapper.findByVideoId(id);
     }
+//    @Override
+//    public void insertVideo(VideoPO videoPO) {
+//        videoMapper.insertVideo(videoPO);
+//    }
+//
+//    @Override
+//    public long[] homeRecommend() {
+//
+//        //创建一个新的数组
+//        long[] arr = new long[40];
+//        //把随机数存入数组当中
+//        Random r = new Random();
+//        for (Integer i = 0; i < arr.length; i++) {
+//            //每循环一次，就会生成一个随机数
+//            Integer num = r.nextInt(40 + 1);
+//            //把生成的随机数存入数组当中
+//            arr[i] = num;
+//        }
+//
+//        return arr;
+//    }
+//
+//    @Override
+//    public VideoPO findByVideoId(@Param("videoId") long videoId) {
+//        return videoMapper.findByVideoId(videoId);
+//    }
+//
+//    @Override
+//    public List<VideoPO> findByUserId(long userId) {
+//        return videoMapper.findByUserId(userId);
+//    }
+//
+//    @Override
+//    public void deleteVideo(long videoId) {
+//        videoMapper.deleteVideo(videoId);
+//    }
+//
+//    @Override
+//    public void updateVideoMsg(VideoPO videoPO) {
+//        videoMapper.updateVideoMsg(videoPO);
+//    }
 
-    @Override
-    public void deleteVideo(long videoId) {
-        videoMapper.deleteVideo(videoId);
-    }
-
-    @Override
-    public void updateVideoMsg(VideoPO videoPO) {
-        videoMapper.updateVideoMsg(videoPO);
-    }
 
 
 }
