@@ -9,7 +9,8 @@ import java.util.List;
 @Repository
 @Mapper
 public interface CommodityImageMapper {
-    void insertCommodityImage(long commodityId, String imageUrl, long imageStatu);
+    void insertCommodityImage(long commodityId, String imageUrl, long imageStatus);
 
     List<CommodityImagePO> findByCommodityId(long commodityId);
+
 }

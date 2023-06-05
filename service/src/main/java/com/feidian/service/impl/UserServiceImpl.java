@@ -175,6 +175,7 @@ public class UserServiceImpl implements UserService {
         return ResponseResult.successResult(200,"修改成功");
     }
 
+    @Transactional
     @Override
     public ResponseResult updateUserDescription(UserDTO userDTO) {
         userDTO.setId(JwtUtil.getUserId());

@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+
 @Component
 @Data
 @NoArgsConstructor
@@ -16,7 +18,7 @@ public class CommodityPO {
 
   private String commodityName;
   private String commodityType;
-  private double price;
+  private BigDecimal price;
   private String commodityDescription;
   private String commodityAddress;
   private String coverUrl;

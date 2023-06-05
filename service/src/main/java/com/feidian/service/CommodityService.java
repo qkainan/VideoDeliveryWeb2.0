@@ -2,22 +2,32 @@ package com.feidian.service;
 
 import com.feidian.dto.CommodityDTO;
 import com.feidian.po.CommodityPO;
+import com.feidian.responseResult.ResponseResult;
 import io.lettuce.core.dynamic.annotation.Param;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.List;
 
 public interface CommodityService {
 
 
-    void deleteCommodity(long commodityId);
+//    void updateCommodityDescription(String description);
+//
+//    List<CommodityPO> findByUserId(long id);
+//
+//    CommodityPO findByCommodityId(@Param("commodityId") long commodityId);
+//
+//    void insertCommodity( CommodityPO commodityPO);
+//
+//    void updateCommodity(CommodityDTO commodityDTO);
 
-    void updateCommodityDescription(String description);
+    ResponseResult uploadCommodity(CommodityDTO commodityDTO, MultipartFile coverFile, MultipartFile[] imageFile);
 
-    List<CommodityPO> findByUserId(long id);
+    ResponseResult displayCommodity(long commodityId) throws URISyntaxException, IOException;
 
-    CommodityPO findByCommodityId(@Param("commodityId") long commodityId);
+    ResponseResult deleteCommodity(long commodityId);
 
-    void insertCommodity( CommodityPO commodityPO);
-
-    void updateCommodity(CommodityDTO commodityDTO);
+    ResponseResult updateCommodity(CommodityDTO commodityDTO);
 }
