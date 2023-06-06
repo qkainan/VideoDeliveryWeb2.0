@@ -21,5 +21,4 @@ public interface CommodityMapper {
 
     List<CommodityPO> findByUserId(long userId);
 
-
 }

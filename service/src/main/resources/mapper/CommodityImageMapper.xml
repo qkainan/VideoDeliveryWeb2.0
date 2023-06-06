@@ -7,4 +7,10 @@
         VALUES (#{commodityId}, #{imageUrl}, #{imageStatu})
     </insert>
 
+    <select id="findByCommodityId" resultType="com.feidian.po.CommodityImagePO">
+        SELECT id, commodity_id, image_url, image_status, create_time, update_time, is_deleted
+        FROM commodity_image
+        WHERE id = #{commodityId};
+    </select>
+
 </mapper>
