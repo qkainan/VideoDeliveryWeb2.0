@@ -10,7 +10,7 @@
     </insert>
 
     <update id="updateVideoInfo">
-        UPDATE user
+        UPDATE video
         <set>
             <if test="videoTitle!=null and videoTitle!=''">
                 video_title = #{videoTitle},
@@ -24,8 +24,9 @@
         </set>
         WHERE id = #{videoId};
     </update>
+
     <update id="deleteVideo">
-        UPDATE user
+        UPDATE video
         SET is_deleted = ${1}
         WHERE id = #{videoId};
     </update>

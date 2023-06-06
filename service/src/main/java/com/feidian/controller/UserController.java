@@ -29,9 +29,20 @@ public class UserController {
         return userService.updateUserDescription(userDTO);
     }
 
+    //设置收货地址模块
     @PostMapping("/uploadUserAddress")
     public ResponseResult uploadUserAddress(@RequestBody AddressDTO addressDTO){
         return addressService.uploadUserAddress(addressDTO);
+    }
+
+    @PostMapping("/deleteAddress")
+    public ResponseResult deleteAddress(long addressId){
+        return addressService.deleteAddress(addressId);
+    }
+
+    @PutMapping("/updateAddressInfo")
+    public ResponseResult updateAddressInfo(@RequestBody AddressDTO addressDTO){
+        return addressService.updateAddressInfo(addressDTO);
     }
 
 }
