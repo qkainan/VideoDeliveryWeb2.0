@@ -7,4 +7,10 @@
         VALUES (#{buyerId}, #{sellerId}, #{addressName}, #{orderStatus});
     </insert>
 
+    <update id="updateOrderStatus">
+        UPDATE `order`
+        SET order_status = ${5}
+        WHERE id = #{id};
+    </update>
+
 </mapper>

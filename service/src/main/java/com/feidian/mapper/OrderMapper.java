@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 @Mapper
 public interface OrderMapper {
     void insertOrder(OrderBO orderBO);
+
+    void updateOrderStatus(long orderId);
 }

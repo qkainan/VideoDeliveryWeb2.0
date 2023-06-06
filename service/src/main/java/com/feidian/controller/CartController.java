@@ -43,12 +43,6 @@ public class CartController {
         return cartService.cartPurchase(purchaseDTO);
     }
 
-//    @Transactional
-//    @PostMapping("/postTakeCommodity")
-//    public ResponseResult postTakeCommodity(long orderId){
-//        orderService.updateStatus(orderId);
-//        return new ResponseResult(200,"操作成功");
-//    }
 
 
 }
