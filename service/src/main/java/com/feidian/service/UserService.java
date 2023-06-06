@@ -16,4 +16,6 @@ public interface UserService {
     ResponseResult updateUserHead(MultipartFile headFile);
 
     ResponseResult updateUserDescription(UserDTO userDTO);
+
+    ResponseResult viewUserHomepage();
 }

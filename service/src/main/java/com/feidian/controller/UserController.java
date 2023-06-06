@@ -45,4 +45,10 @@ public class UserController {
         return addressService.updateAddressInfo(addressDTO);
     }
 
+    //查看以往发布的视频、商品等信息
+    @GetMapping("/viewUserHomepage")
+    public ResponseResult viewUserHomepage() {
+        return userService.viewUserHomepage();
+    }
+
 }

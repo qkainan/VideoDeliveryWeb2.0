@@ -4,11 +4,14 @@ import com.feidian.bo.UserBO;
 import com.feidian.dto.LoginDTO;
 import com.feidian.dto.SignupDTO;
 import com.feidian.dto.UserDTO;
-import com.feidian.mapper.UserMapper;
-import com.feidian.po.UserPO;
+import com.feidian.mapper.*;
+import com.feidian.po.*;
 import com.feidian.responseResult.ResponseResult;
-import com.feidian.service.UserService;
+import com.feidian.service.*;
 import com.feidian.util.*;
+import com.feidian.vo.PurchaseOrderVO;
+import com.feidian.vo.SaleOrderVO;
+import com.feidian.vo.UserHomepageVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -18,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -28,6 +32,21 @@ import static com.feidian.enums.HttpCodeEnum.REQUIRE_USERNAME;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private CommodityMapper commodityMapper;
+
+    @Autowired
+    private VideoMapper videoMapper;
+
+    @Autowired
+    private CartMapper cartMapper;
+
+    @Autowired
+    private OrderMapper orderMapper;
+
+    @Autowired
+    private OrderCommodityMapper orderCommodityMapper;
 
     @Autowired
     private RedisTemplate redisTemplate;
@@ -183,6 +202,25 @@ public class UserServiceImpl implements UserService {
         userMapper.updateUserInfo(userBO);
         return ResponseResult.successResult(200,"更新个性签名成功");
     }
+
+    @Override
+    public ResponseResult viewUserHomepage() {
+        long userId = JwtUtil.getUserId();
+
+        UserPO userPO = userMapper.findById(userId);
+
+        List<VideoPO> videoPOList = videoMapper.findByUserId(userId);
+        List<CommodityPO> commodityPOList = commodityMapper.findByUserId(userId);
+        List<OrderPO> buyerOrderVoList = orderMapper.findByBuyerId(userId);
+        List<OrderPO> sellerOrderVoList = orderMapper.findBySellerId(userId);
+        List<CartPO> cartList = cartMapper.findByUserId(userId);
+
+        UserHomepageVO userHomepageVo = new UserHomepageVO(userId, userPO.getUsername(),
+                userPO.getUserDescription(), userPO.getPhone(), userPO.getHeadUrl(),
+                userPO.getEmailAddress(), videoPOList, commodityPOList, buyerOrderVoList,sellerOrderVoList, cartList);
+        return  ResponseResult.successResult(userHomepageVo);
+    }
+
 
 
     //加密用户密码

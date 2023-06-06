@@ -5,6 +5,8 @@ import com.feidian.po.OrderPO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @Mapper
 public interface OrderMapper {
@@ -12,7 +14,7 @@ public interface OrderMapper {
 
     void updateOrderStatus(long orderId);
 
-    OrderPO[] findByBuyerId(long userId);
+    List<OrderPO> findByBuyerId(long userId);
 
-    OrderPO[] findBySellerId(long userId);
+    List<OrderPO> findBySellerId(long userId);
 }

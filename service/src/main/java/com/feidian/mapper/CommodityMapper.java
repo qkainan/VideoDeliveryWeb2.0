@@ -1,9 +1,7 @@
 package com.feidian.mapper;
 
 import com.feidian.bo.CommodityBO;
-import com.feidian.dto.CommodityDTO;
 import com.feidian.po.CommodityPO;
-import io.lettuce.core.dynamic.annotation.Param;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -23,8 +21,5 @@ public interface CommodityMapper {
 
     List<CommodityPO> findByUserId(long userId);
 
-//    void updateCommodityDescription(String description);
-//
-//    List<CommodityPO> findByUserId(long id);
-//
+
 }
