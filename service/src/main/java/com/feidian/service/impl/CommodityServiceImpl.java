@@ -118,13 +118,9 @@ public class CommodityServiceImpl implements CommodityService {
 
     @Override
     public ResponseResult beforeUpdateCommodityInfo(long commodityId) {
-        return ResponseResult.successResult(findByCommodityId(commodityId));
+        return ResponseResult.successResult(commodityMapper.findByCommodityId(commodityId));
     }
 
-
-    public CommodityPO findByCommodityId(long commodityId) {
-        return commodityMapper.findByCommodityId(commodityId);
-    }
 
 
 //    public void updateCommodityDescription(String description){

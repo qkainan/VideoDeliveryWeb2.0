@@ -114,7 +114,7 @@ public class UserServiceImpl implements UserService {
         }
 
         //密码符合要求则开始验证
-        UserPO userPO = findByName(loginDTO.getUsername());
+        UserPO userPO = userMapper.findByName(loginDTO.getUsername());
         Long id01 = userPO.getId();
         String username01 = userPO.getUsername();
 
@@ -184,11 +184,6 @@ public class UserServiceImpl implements UserService {
         return ResponseResult.successResult(200,"更新个性签名成功");
     }
 
-
-    //根据用户名调出用户信息
-    public UserPO findByName(String username) {
-        return userMapper.findByName(username);
-    }
 
     //加密用户密码
     public ResponseResult getEncryptUserPwd(String password) {

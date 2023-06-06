@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.feidian.mapper.CartMapper">
+
+
+    <insert id="insertCart">
+        INSERT INTO cart
+        (user_id, commodity_id, address_id, commodity_num, order_status, is_deleted)
+        VALUES (#{userId}, #{commodityId}, #{addressId}, #{commodityNum}, #{orderStatus}, ${0});
+    </insert>
+
+
 </mapper>
