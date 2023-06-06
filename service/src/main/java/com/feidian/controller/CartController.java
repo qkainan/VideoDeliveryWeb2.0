@@ -2,6 +2,8 @@ package com.feidian.controller;
 
 
 
+import com.feidian.dto.CartDTO;
+import com.feidian.responseResult.ResponseResult;
 import com.feidian.service.*;
 
 
@@ -23,27 +25,14 @@ public class CartController {
     @Autowired
     private OrderCommodityService orderCommodityService;
 
-//    @Transactional
-//    @PostMapping("/postCart")
-//    @ResponseBody
-//    public ResponseResult postCart(@RequestBody CartDTO cartDTO){
-//        CommodityPO commodityPO = commodityService.findByCommodityId(cartDTO.getCommodityId());
-//        long orderStatus = 0;
-//
-//        BigDecimal totalPrice = commodityPO.getPrice().multiply(cartDTO.getCommodityNum());
-//
-//        CartBO cartBO = new CartBO(0,cartDTO.getUserId(), cartDTO.getCommodityId(),
-//                cartDTO.getAddressId(), commodityPO.getCommodityDescription(),
-//                commodityPO.getPrice(), cartDTO.getCommodityNum(), totalPrice,
-//                orderStatus);
-//
-//        cartService.insertCart(cartBO.getUserId(), cartBO.getCommodityId(),
-//                cartBO.getAddressId(), cartBO.getCommodityDescription(),
-//                cartBO.getPrice(), cartBO.getCommodityNum(), cartBO.getTotalPrice(),
-//                cartBO.getOrderStatus());
-//
-//        return new ResponseResult(200,"操作成功");
-//    }
+    //上传到购物车
+    @PostMapping("/uploadCart")
+    @ResponseBody
+    public ResponseResult postCart(@RequestBody CartDTO cartDTO){
+        return cartService.uploadCart(cartDTO);
+    }
+
+
 //    @Transactional
 //    @GetMapping("/getCartVOList")
 //    public ResponseResult getCartVOList() {
