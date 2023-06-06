@@ -77,7 +77,7 @@ public class VideoServiceImpl implements VideoService {
 
     @Override
     public ResponseResult displayVideo(long id) throws IOException, URISyntaxException {
-        VideoPO videoPO = findByVideoId(id);
+        VideoPO videoPO = videoMapper.findByVideoId(id);
         UserPO userPO = userMapper.findById(videoPO.getUserId());
 
         List<VideoCommodityPO> videoCommodityPOList = videoCommodityMapper.findByVideoId(id);
@@ -115,19 +115,10 @@ public class VideoServiceImpl implements VideoService {
 
     @Override
     public ResponseResult beforeUpdateVideoInfo(long videoId) {
-        return ResponseResult.successResult(findByVideoId(videoId));
+        return ResponseResult.successResult(videoMapper.findByVideoId(videoId));
     }
 
 
-    public VideoPO findByVideoId(long id){
-        return videoMapper.findByVideoId(id);
-    }
-
-//    @Override
-//    public void insertVideo(VideoPO videoPO) {
-//        videoMapper.insertVideo(videoPO);
-//    }
-//
 //    @Override
 //    public long[] homeRecommend() {
 //
