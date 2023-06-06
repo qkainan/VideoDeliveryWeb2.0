@@ -9,5 +9,11 @@
         VALUES (#{userId}, #{commodityId}, #{addressId}, #{commodityNum}, #{orderStatus}, ${0});
     </insert>
 
+    <select id="findByUserId" resultType="com.feidian.po.CartPO">
+        SELECT id, user_id, commodity_id, address_id, commodity_num, order_status, create_time, update_time, is_deleted
+        FROM cart
+        WHERE user_id = #{userId};
+    </select>
+
 
 </mapper>

@@ -28,33 +28,17 @@ public class CartController {
     //上传到购物车
     @PostMapping("/uploadCart")
     @ResponseBody
-    public ResponseResult postCart(@RequestBody CartDTO cartDTO){
+    public ResponseResult uploadCart(@RequestBody CartDTO cartDTO){
         return cartService.uploadCart(cartDTO);
     }
 
+    //展示购物车列表
+    @GetMapping("/displayCartVOList")
+    public ResponseResult displayCartVOList() {
+        return cartService.displayCartVOList();
+    }
 
-//    @Transactional
-//    @GetMapping("/getCartVOList")
-//    public ResponseResult getCartVOList() {
-//
-//        List<CartPO> list = getCartList(JwtUtil.getUserId());
-//        List<CartVO> cartVOList = new ArrayList<>();
-//
-//
-//        for (CartPO cart : list) {
-//
-//            CommodityPO commodityPO = commodityService.findByCommodityId(cart.getCommodityId());
-//            BigDecimal totalPrice = commodityPO.getPrice().multiply(cart.getCommodityNum());
-//
-//            CartVO cartVO = new CartVO(cart.getId(), cart.getUserId(), cart.getCommodityId(),
-//                    cart.getAddressId(), commodityPO.getCommodityDescription(), commodityPO.getPrice(),
-//                    cart.getCommodityNum(), totalPrice, cart.getOrderStatus(),
-//                    cart.getUpdateTime());
-//            cartVOList.add(cartVO);
-//        }
-//
-//        return new ResponseResult(200, "操作成功", cartVOList);
-//    }
+
 //
 //    @Transactional
 //    @PutMapping("/putCartStatus")
@@ -103,9 +87,6 @@ public class CartController {
 //        return new ResponseResult(200,"操作成功");
 //    }
 //
-//
-//    public List<CartPO> getCartList(long userId){
-//        return cartService.findByUserId(userId);
-//    }
+
 
 }

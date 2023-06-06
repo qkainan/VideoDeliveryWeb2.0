@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+
 @Component
 @Data
 @NoArgsConstructor
@@ -15,7 +17,7 @@ public class CartPO {
   private long userId;
   private long commodityId;
   private long addressId;
-  private double commodityNum;
+  private BigDecimal commodityNum;
 
   private long orderStatus;
 
