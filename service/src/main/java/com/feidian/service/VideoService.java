@@ -11,18 +11,11 @@ import java.net.URISyntaxException;
 
 public interface VideoService {
 
-//    void insertVideo(VideoPO videoPOVo);
-//
+
 //    long[] homeRecommend();
-//
-//    VideoPO findByVideoId(@Param("videoId") long videoId);
-//
+
 //    List<VideoPO> findByUserId(long userId);
-//
-//
-//    void deleteVideo(long videoId);
-//
-//    void updateVideoMsg(VideoPO videoPO);
+
 
     ResponseResult receivingVideo(VideoDTO receivingVideoDTO, MultipartFile dataFile, MultipartFile coverFile);
 
@@ -32,5 +25,5 @@ public interface VideoService {
 
     ResponseResult deleteVideo(long videoId);
 
-
+    ResponseResult beforeUpdateVideoInfo(long videoId);
 }

@@ -105,7 +105,7 @@ public class CommodityServiceImpl implements CommodityService {
     }
 
     @Override
-    public ResponseResult updateCommodity(CommodityDTO commodityDTO) {
+    public ResponseResult updateCommodityInfo(CommodityDTO commodityDTO) {
         CommodityBO commodityBO = new CommodityBO(commodityDTO.getCommodityId(), JwtUtil.getUserId(),
                 commodityDTO.getCommodityName(), commodityDTO.getCommodityType(),
                 commodityDTO.getPrice(), commodityDTO.getCommodityDescription(),
@@ -114,6 +114,16 @@ public class CommodityServiceImpl implements CommodityService {
         commodityMapper.updateCommodity(commodityBO);
 
         return new ResponseResult(200,"更改成功");
+    }
+
+    @Override
+    public ResponseResult beforeUpdateCommodityInfo(long commodityId) {
+        return ResponseResult.successResult(findByCommodityId(commodityId));
+    }
+
+
+    public CommodityPO findByCommodityId(long commodityId) {
+        return commodityMapper.findByCommodityId(commodityId);
     }
 
 
@@ -126,12 +136,6 @@ public class CommodityServiceImpl implements CommodityService {
 //        return commodityMapper.findByUserId(id);
 //    }
 //
-//    @Override
-//    public CommodityPO findByCommodityId(@Param("commodityId") long commodityId) {
-//        return commodityMapper.findByCommodityId(commodityId);
-//    }
-
-
 
 
 }

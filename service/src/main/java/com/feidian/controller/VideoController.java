@@ -73,6 +73,12 @@ public class VideoController {
         return videoCommodityService.updateVideoCommodityInfo(videoDTO);
     }
 
+    //在更新视频信息之前，将已有的信息带上，避免更新部分信息覆盖之前的信息的情况
+    @GetMapping("/beforeUpdateVideoInfo")
+    public ResponseResult beforeUpdateVideoInfo(long videoId){
+        return videoService.beforeUpdateVideoInfo(videoId);
+    }
+
 //    @GetMapping("/getHomeRecommend")
 //    public ResponseResult homeRecommend() throws IOException, URISyntaxException {
 //        List<VideoPO> list = new ArrayList<>();

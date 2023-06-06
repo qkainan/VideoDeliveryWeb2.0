@@ -113,11 +113,16 @@ public class VideoServiceImpl implements VideoService {
         return ResponseResult.successResult();
     }
 
+    @Override
+    public ResponseResult beforeUpdateVideoInfo(long videoId) {
+        return ResponseResult.successResult(findByVideoId(videoId));
+    }
 
 
     public VideoPO findByVideoId(long id){
         return videoMapper.findByVideoId(id);
     }
+
 //    @Override
 //    public void insertVideo(VideoPO videoPO) {
 //        videoMapper.insertVideo(videoPO);
@@ -141,26 +146,9 @@ public class VideoServiceImpl implements VideoService {
 //    }
 //
 //    @Override
-//    public VideoPO findByVideoId(@Param("videoId") long videoId) {
-//        return videoMapper.findByVideoId(videoId);
-//    }
-//
-//    @Override
 //    public List<VideoPO> findByUserId(long userId) {
 //        return videoMapper.findByUserId(userId);
 //    }
-//
-//    @Override
-//    public void deleteVideo(long videoId) {
-//        videoMapper.deleteVideo(videoId);
-//    }
-//
-//    @Override
-//    public void updateVideoMsg(VideoPO videoPO) {
-//        videoMapper.updateVideoMsg(videoPO);
-//    }
-
-
 
 }
 

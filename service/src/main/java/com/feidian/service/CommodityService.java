@@ -29,5 +29,7 @@ public interface CommodityService {
 
     ResponseResult deleteCommodity(long commodityId);
 
-    ResponseResult updateCommodity(CommodityDTO commodityDTO);
+    ResponseResult updateCommodityInfo(CommodityDTO commodityDTO);
+
+    ResponseResult beforeUpdateCommodityInfo(long commodityId);
 }

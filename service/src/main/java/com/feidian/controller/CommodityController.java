@@ -21,9 +21,6 @@ public class CommodityController {
     @Autowired
     private CommodityService commodityService;
 
-    @Autowired
-    private CommodityImageService commodityImageService;
-
     @PostMapping(value = "/uploadCommodity", consumes = "multipart/form-data")
     public ResponseResult uploadCommodity(@RequestPart(name = "commodityDTO") CommodityDTO commodityDTO,
                                           @RequestPart(name = "coverFile") MultipartFile coverFile,
@@ -41,10 +38,15 @@ public class CommodityController {
         return commodityService.deleteCommodity(commodityId);
     }
 
-    @PutMapping("/putUpdateCommodityMsg")
-    public ResponseResult updateCommodityMsg(@RequestBody CommodityDTO commodityDTO){
-        return commodityService.updateCommodity(commodityDTO);
+    @PutMapping("/updateCommodityInfo")
+    public ResponseResult updateCommodityInfo(@RequestBody CommodityDTO commodityDTO){
+        return commodityService.updateCommodityInfo(commodityDTO);
     }
 
+    //在更新商品信息之前，将已有的信息带上，避免更新部分信息覆盖之前的信息的情况
+    @GetMapping("/beforeUpdateCommodityInfo")
+    public ResponseResult beforeUpdateCommodityInfo(long commodityId){
+        return commodityService.beforeUpdateCommodityInfo(commodityId);
+    }
 
 }
