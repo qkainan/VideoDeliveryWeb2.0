@@ -7,4 +7,6 @@ public interface CartService {
     ResponseResult displayCartVOList();
 
     ResponseResult uploadCart(CartDTO cartDTO);
+
+    ResponseResult deleteCart(long cartId);
 }

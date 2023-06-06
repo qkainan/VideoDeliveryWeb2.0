@@ -15,4 +15,6 @@ public interface CartMapper {
     void insertCart(CartBO cartBO);
 
     List<CartPO> findByUserId(long userId);
+
+    void deleteCart(long cartId);
 }

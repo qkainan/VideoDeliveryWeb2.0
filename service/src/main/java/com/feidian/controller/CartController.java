@@ -38,6 +38,12 @@ public class CartController {
         return cartService.displayCartVOList();
     }
 
+    //删除购物车
+    @PostMapping("/deleteCart")
+    public ResponseResult deleteCart(long cartId){
+        return cartService.deleteCart(cartId);
+    }
+
 
 //
 //    @Transactional
@@ -80,13 +86,5 @@ public class CartController {
 //        return new ResponseResult(200,"操作成功");
 //    }
 //
-//    @Transactional
-//    @PostMapping("/postDeleteCart")
-//    public ResponseResult postDeleteCart(long cartId){
-//        cartService.deleteCart(cartId);
-//        return new ResponseResult(200,"操作成功");
-//    }
-//
-
 
 }

@@ -15,5 +15,10 @@
         WHERE user_id = #{userId};
     </select>
 
+    <update id="deleteCart">
+        UPDATE cart
+        SET is_deleted = ${1}
+        WHERE id = #{cartId};
+    </update>
 
 </mapper>

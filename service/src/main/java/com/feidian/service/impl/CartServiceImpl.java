@@ -14,6 +14,7 @@ import com.feidian.vo.CartVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class CartServiceImpl implements CartService {
     @Autowired
     private CommodityMapper commodityMapper;
 
-
+    @Transactional
     @Override
     public ResponseResult uploadCart(CartDTO cartDTO) {
         CommodityPO commodityPO = commodityMapper.findByCommodityId(cartDTO.getCommodityId());
@@ -46,6 +47,7 @@ public class CartServiceImpl implements CartService {
         return new ResponseResult();
     }
 
+    @Transactional
     @Override
     public ResponseResult displayCartVOList() {
         List<CartPO> list = cartMapper.findByUserId(JwtUtil.getUserId());
@@ -67,5 +69,10 @@ public class CartServiceImpl implements CartService {
         return ResponseResult.successResult(cartVOList);
     }
 
+    @Override
+    public ResponseResult deleteCart(long cartId) {
+        cartMapper.deleteCart(cartId);
+        return ResponseResult.successResult();
+    }
 
 }
