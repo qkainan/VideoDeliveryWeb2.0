@@ -10,15 +10,45 @@
     </insert>
 
     <select id="findByUserId" resultType="com.feidian.po.CartPO">
-        SELECT id, user_id, commodity_id, address_id, commodity_num, order_status, create_time, update_time, is_deleted
+        SELECT id,
+               user_id,
+               commodity_id,
+               address_id,
+               commodity_num,
+               order_status,
+               create_time,
+               update_time,
+               is_deleted
         FROM cart
         WHERE user_id = #{userId};
     </select>
+
 
     <update id="deleteCart">
         UPDATE cart
         SET is_deleted = ${1}
         WHERE id = #{cartId};
+    </update>
+
+
+    <select id="findByCartId" resultType="com.feidian.po.CartPO">
+        SELECT id,
+               user_id,
+               commodity_id,
+               address_id,
+               commodity_num,
+               order_status,
+               create_time,
+               update_time,
+               is_deleted
+        FROM cart
+        WHERE id = #{id};
+    </select>
+
+    <update id="updateOrderStatus">
+        UPDATE cart
+        SET order_status = ${1}
+        WHERE id = #{id};
     </update>
 
 </mapper>

@@ -1,14 +1,17 @@
 package com.feidian.service.impl;
 
 import com.feidian.bo.CartBO;
+import com.feidian.bo.OrderBO;
 import com.feidian.dto.CartDTO;
-import com.feidian.mapper.CartMapper;
-import com.feidian.mapper.CommodityMapper;
+import com.feidian.dto.PurchaseDTO;
+import com.feidian.mapper.*;
+import com.feidian.po.AddressPO;
 import com.feidian.po.CartPO;
 import com.feidian.po.CommodityPO;
 import com.feidian.responseResult.ResponseResult;
 import com.feidian.service.CartService;
 import com.feidian.service.CommodityService;
+import com.feidian.service.OrderCommodityService;
 import com.feidian.util.JwtUtil;
 import com.feidian.vo.CartVO;
 import org.apache.ibatis.annotations.Mapper;
@@ -23,11 +26,17 @@ import java.util.List;
 @Repository
 @Mapper
 public class CartServiceImpl implements CartService {
-
     @Autowired
     private CartMapper cartMapper;
     @Autowired
     private CommodityMapper commodityMapper;
+    @Autowired
+    private AddressMapper addressMapper;
+    @Autowired
+    private OrderMapper orderMapper;
+    @Autowired
+    private OrderCommodityMapper orderCommodityMapper;
+
 
     @Transactional
     @Override
@@ -73,6 +82,32 @@ public class CartServiceImpl implements CartService {
     public ResponseResult deleteCart(long cartId) {
         cartMapper.deleteCart(cartId);
         return ResponseResult.successResult();
+    }
+
+    @Override
+    public ResponseResult cartPurchase(PurchaseDTO purchaseDTO) {
+        long userId = JwtUtil.getUserId();
+
+        if (purchaseDTO.getId() != 0) {
+            CartPO cartPO = cartMapper.findByCartId(purchaseDTO.getId());
+            //orderStatus（1：已购买 0：未购买）
+            cartMapper.updateOrderStatus(cartPO.getId());
+            cartMapper.deleteCart(cartPO.getId());
+        }
+
+        //状态（5：已收货 4：代发货 3：已发货 1：待发货 0：已退款 ）
+        long orderStatus = 1;
+        CommodityPO commodityPO = commodityMapper.findByCommodityId(purchaseDTO.getCommodityId());
+        AddressPO address = addressMapper.findByAddressId(purchaseDTO.getAddressId());
+
+        //Todo order orderCommodity同步更新
+        OrderBO orderBO = new OrderBO( userId, commodityPO.getUserId(), address.getAddressName(), orderStatus);
+
+        orderMapper.insertOrder(orderBO);
+
+        orderCommodityMapper.insertOrderCommodity(orderBO.getId(),commodityPO.getId(),purchaseDTO.getCommodityNum());
+
+        return new ResponseResult(200, "购买成功");
     }
 
 }

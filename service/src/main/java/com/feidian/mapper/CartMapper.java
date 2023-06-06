@@ -17,4 +17,8 @@ public interface CartMapper {
     List<CartPO> findByUserId(long userId);
 
     void deleteCart(long cartId);
+
+    CartPO findByCartId(long id);
+
+    void updateOrderStatus(long id);
 }

@@ -2,6 +2,7 @@ package com.feidian.mapper;
 
 import com.feidian.bo.AddressBO;
 import com.feidian.dto.AddressDTO;
+import com.feidian.po.AddressPO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -13,4 +14,6 @@ public interface AddressMapper {
     void deleteAddress(long addressId);
 
     void updateAddressInfo(AddressBO addressBO);
+
+    AddressPO findByAddressId(long addressId);
 }
