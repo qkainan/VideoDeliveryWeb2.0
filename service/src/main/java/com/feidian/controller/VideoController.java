@@ -3,6 +3,7 @@ package com.feidian.controller;
 import com.feidian.bo.VideoBO;
 import com.feidian.dto.VideoDTO;
 
+import com.feidian.po.CommodityPO;
 import com.feidian.po.VideoCommodityPO;
 import com.feidian.po.VideoPO;
 import com.feidian.responseResult.ResponseResult;
@@ -14,11 +15,13 @@ import com.feidian.service.VideoService;
 
 import com.feidian.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.List;
 
 
 @RestController
@@ -54,6 +57,12 @@ public class VideoController {
     @PutMapping("/updateVideoInfo")
     public ResponseResult updateVideoInfo(@RequestBody VideoDTO videoDTO) {
         return videoService.updateVideoInfo(videoDTO);
+    }
+
+    @Transactional
+    @GetMapping("/viewPerVideos")
+    public ResponseResult viewPerVideos(){
+        return videoService.viewPerVideos();
     }
 
     @PostMapping ("/deleteVideo")

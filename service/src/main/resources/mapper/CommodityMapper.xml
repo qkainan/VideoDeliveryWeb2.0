@@ -10,10 +10,37 @@
     </insert>
 
     <select id="findByCommodityId" resultType="com.feidian.po.CommodityPO">
-        SELECT id,user_id,commodity_name, commodity_type, price, commodity_description, commodity_address,
-               cover_url, commodity_status, create_time, update_time, is_deleted
+        SELECT id,
+               user_id,
+               commodity_name,
+               commodity_type,
+               price,
+               commodity_description,
+               commodity_address,
+               cover_url,
+               commodity_status,
+               create_time,
+               update_time,
+               is_deleted
         FROM commodity
         WHERE id = #{commodityId}
+    </select>
+
+    <select id="findByUserId">
+        SELECT id,
+               user_id,
+               commodity_name,
+               commodity_type,
+               price,
+               commodity_description,
+               commodity_address,
+               cover_url,
+               commodity_status,
+               create_time,
+               update_time,
+               is_deleted
+        FROM commodity
+        WHERE user_id = #{userId}
     </select>
 
     <update id="deleteCommodity">

@@ -121,6 +121,12 @@ public class CommodityServiceImpl implements CommodityService {
         return ResponseResult.successResult(commodityMapper.findByCommodityId(commodityId));
     }
 
+    @Override
+    public ResponseResult viewPerCommodities() {
+        long userId = JwtUtil.getUserId();
+        List<CommodityPO> commodityPOList = commodityMapper.findByUserId(userId);
+        return ResponseResult.successResult(commodityPOList);
+    }
 
 
 //    public void updateCommodityDescription(String description){

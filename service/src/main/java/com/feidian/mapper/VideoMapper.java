@@ -20,16 +20,8 @@ public interface VideoMapper {
 
     void deleteVideo(long videoId);
 
+    List<VideoPO> findByUserId(long userId);
 
-    // void deleteVideo(long videoId);
-
-
-
-   // void findByVideoName();
-
-
-
-    //List<VideoPO> findByUserId(long userId);
 
 
 }

@@ -6,13 +6,15 @@ import com.feidian.responseResult.ResponseResult;
 import com.feidian.service.CommodityImageService;
 import com.feidian.service.CommodityService;
 
+import com.feidian.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.net.URISyntaxException;
-
+import java.util.List;
 
 
 @RestController
@@ -31,6 +33,11 @@ public class CommodityController {
     @GetMapping("/displayCommodity")
     public ResponseResult displayCommodity(long commodityId) throws IOException, URISyntaxException {
         return commodityService.displayCommodity(commodityId);
+    }
+
+    @GetMapping("/viewPerCommodities")
+    public ResponseResult viewPerCommodities(){
+        return commodityService.viewPerCommodities();
     }
 
     @PostMapping("/deleteCommodity")

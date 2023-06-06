@@ -26,4 +26,6 @@ public interface VideoService {
     ResponseResult deleteVideo(long videoId);
 
     ResponseResult beforeUpdateVideoInfo(long videoId);
+
+    ResponseResult viewPerVideos();
 }

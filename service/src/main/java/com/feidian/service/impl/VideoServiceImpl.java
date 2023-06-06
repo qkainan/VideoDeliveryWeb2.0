@@ -118,6 +118,14 @@ public class VideoServiceImpl implements VideoService {
         return ResponseResult.successResult(videoMapper.findByVideoId(videoId));
     }
 
+    @Override
+    public ResponseResult viewPerVideos() {
+        long userId = JwtUtil.getUserId();
+        List<VideoPO> videoPOList = videoMapper.findByUserId(userId);
+
+        return ResponseResult.successResult(videoPOList);
+    }
+
 
 //    @Override
 //    public long[] homeRecommend() {
@@ -134,11 +142,6 @@ public class VideoServiceImpl implements VideoService {
 //        }
 //
 //        return arr;
-//    }
-//
-//    @Override
-//    public List<VideoPO> findByUserId(long userId) {
-//        return videoMapper.findByUserId(userId);
 //    }
 
 }

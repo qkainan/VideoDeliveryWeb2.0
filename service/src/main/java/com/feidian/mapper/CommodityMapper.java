@@ -21,6 +21,8 @@ public interface CommodityMapper {
 
     void updateCommodity(CommodityBO commodityBO);
 
+    List<CommodityPO> findByUserId(long userId);
+
 //    void updateCommodityDescription(String description);
 //
 //    List<CommodityPO> findByUserId(long id);

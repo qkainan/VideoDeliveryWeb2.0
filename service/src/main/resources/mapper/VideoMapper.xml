@@ -49,4 +49,22 @@
         FROM video
         WHERE id = #{id};
     </select>
+
+    <select id="findByUserId" resultType="com.feidian.po.VideoPO">
+        SELECT id,
+               user_id,
+               video_name,
+               video_title,
+               video_type,
+               video_description,
+               cover_url,
+               data_url,
+               video_status,
+               create_time,
+               update_time,
+               is_deleted
+        FROM video
+        WHERE user_id = #{userId};
+    </select>
+
 </mapper>
