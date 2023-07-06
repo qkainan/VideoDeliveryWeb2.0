@@ -2,10 +2,7 @@ package com.feidian.service.impl;
 
 import com.feidian.bo.VideoBO;
 import com.feidian.dto.VideoDTO;
-import com.feidian.mapper.CommodityMapper;
-import com.feidian.mapper.SecurityUserMapper;
-import com.feidian.mapper.VideoCommodityMapper;
-import com.feidian.mapper.VideoMapper;
+import com.feidian.mapper.*;
 import com.feidian.po.CommodityPO;
 import com.feidian.po.UserPO;
 import com.feidian.po.VideoCommodityPO;
@@ -33,7 +30,7 @@ public class VideoServiceImpl implements VideoService {
     private VideoMapper videoMapper;
 
     @Autowired
-    private SecurityUserMapper userMapper;
+    private UserMapper userMapper;
 
     @Autowired
     private VideoCommodityMapper videoCommodityMapper;

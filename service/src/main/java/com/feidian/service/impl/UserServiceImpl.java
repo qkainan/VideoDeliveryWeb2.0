@@ -22,7 +22,7 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
-    private SecurityUserMapper userMapper;
+    private UserMapper userMapper;
 
     @Autowired
     private CommodityMapper commodityMapper;
