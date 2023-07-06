@@ -60,7 +60,7 @@ public class CommodityServiceImpl implements CommodityService {
                 MultipartFile multipartFile : imageFile) {
             ReceivingFileUtil.saveFile(multipartFile, uploadCommodityImageDir);
             commodityImageUrl = ReceivingFileUtil.saveFile(multipartFile, uploadCommodityImageDir);
-            commodityImageMapper.insertCommodityImage(commodityBO.getId(), commodityImageUrl, 1);
+            commodityImageMapper.insertCommodityImage(commodityBO.getId(), commodityImageUrl, 1L);
         }
 
         commodityMapper.insertCommodity(commodityBO);

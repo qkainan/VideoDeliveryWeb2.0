@@ -42,11 +42,11 @@ public class CartServiceImpl implements CartService {
     @Override
     public ResponseResult uploadCart(CartDTO cartDTO) {
         CommodityPO commodityPO = commodityMapper.findByCommodityId(cartDTO.getCommodityId());
-        Long orderStatus = 0;
+        Long orderStatus = 0L;
 
         BigDecimal totalPrice = commodityPO.getPrice().multiply(cartDTO.getCommodityNum());
 
-        CartBO cartBO = new CartBO(0,cartDTO.getUserId(), cartDTO.getCommodityId(),
+        CartBO cartBO = new CartBO(0L,cartDTO.getUserId(), cartDTO.getCommodityId(),
                 cartDTO.getAddressId(), commodityPO.getCommodityDescription(),
                 commodityPO.getPrice(), cartDTO.getCommodityNum(), totalPrice,
                 orderStatus);
@@ -96,7 +96,7 @@ public class CartServiceImpl implements CartService {
         }
 
         //状态（5：已收货 4：代发货 3：已发货 1：待发货 0：已退款 ）
-        Long orderStatus = 1;
+        Long orderStatus = 1L;
         CommodityPO commodityPO = commodityMapper.findByCommodityId(purchaseDTO.getCommodityId());
         AddressPO address = addressMapper.findByAddressId(purchaseDTO.getAddressId());
 

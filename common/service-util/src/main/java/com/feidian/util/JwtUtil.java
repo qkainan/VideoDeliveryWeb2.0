@@ -93,7 +93,7 @@ public class JwtUtil {
             Jws<Claims> claimsJws = Jwts.parser().setSigningKey(generalKey()).parseClaimsJws(token);
             Claims claims = claimsJws.getBody();
             String userId = (String) claims.get("sub");
-            return Integer.parseInt(userId);
+            return Long.parseLong(userId);
 
         } catch (Exception e) {
             e.printStackTrace();
