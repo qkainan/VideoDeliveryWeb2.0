@@ -14,7 +14,7 @@
         <module>common</module>
         <module>common/common-util</module>
         <module>common/service-util</module>
-        <module>springsecurity</module>
+        <module>security</module>
     </modules>
 
     <properties>
