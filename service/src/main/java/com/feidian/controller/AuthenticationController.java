@@ -2,27 +2,20 @@ package com.feidian.controller;
 
 import com.feidian.dto.LoginDTO;
 import com.feidian.dto.SignupDTO;
-import com.feidian.po.UserPO;
 import com.feidian.responseResult.ResponseResult;
-import com.feidian.service.UserService;
+import com.feidian.service.AuthenticationService;
 import com.feidian.service.UtilService;
-import com.feidian.util.AESUtil;
-import com.feidian.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
 @RestController
-public class IndexController {
+public class AuthenticationController {
 
     @Autowired
-    private UserService userService;
+    private AuthenticationService authenticationService;
 
     @Autowired
     private UtilService utilService;
@@ -32,7 +25,7 @@ public class IndexController {
     @PostMapping("/fastSignup")
     public ResponseResult fastSignup(@RequestBody SignupDTO signupDTO){
         //Todo 规范性验证放在Controller层，业务性验证放在Service层
-        return userService.fastSignup(signupDTO);
+        return authenticationService.fastSignup(signupDTO);
     }
 
     //发送验证码
@@ -43,17 +36,21 @@ public class IndexController {
 
     //邮箱注册
     @PostMapping("/emailSignup")
-    public ResponseResult emailSignup(@RequestBody SignupDTO signupDTO) throws Exception {
+    public ResponseResult emailSignup(@RequestBody SignupDTO signupDTO){
         //Todo 规范性验证放在Controller层，业务性验证放在Service层
-        return userService.emailSignup(signupDTO);
+        return authenticationService.emailSignup(signupDTO);
     }
 
     //登录
     @PostMapping("/login")
     public ResponseResult login(@RequestBody LoginDTO loginDTO){
-        return userService.login(loginDTO);
+        return authenticationService.login(loginDTO);
     }
 
+    @GetMapping("/user/logout")
+    public ResponseResult logout(){
+        return authenticationService.logout();
+    }
 
 
 }

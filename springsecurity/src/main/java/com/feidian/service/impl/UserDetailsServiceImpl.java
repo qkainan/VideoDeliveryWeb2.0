@@ -2,11 +2,9 @@ package com.feidian.service.impl;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
-import com.feidian.domain.LoginUser;
+import com.feidian.domain.AuthenticatedUser;
 import com.feidian.domain.User;
 import com.feidian.mapper.UserMapper;
-import com.feidian.responseResult.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -40,7 +38,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         //测试写法
         List<String> list = new ArrayList<>(Arrays.asList("test","admin"));
         //把数据封装成UserDetails返回
-        LoginUser loginUser = new LoginUser(user, list);
+        AuthenticatedUser loginUser = new AuthenticatedUser(user, list);
         return null;
     }
 }

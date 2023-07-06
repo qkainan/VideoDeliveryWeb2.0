@@ -1,7 +1,6 @@
 package com.feidian.domain;
 
-
-import com.alibaba.fastjson2.annotation.JSONField;
+import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -14,14 +13,14 @@ import java.util.stream.Collectors;
 
 @Data
 @NoArgsConstructor
-public class LoginUser implements UserDetails {
+public class AuthenticatedUser implements UserDetails {
 
     private User user;
 
     //存储权限信息
     private List<String> permissions;
 
-    public LoginUser(User user,List<String> permissions) {
+    public AuthenticatedUser(User user, List<String> permissions) {
         this.user = user;
         this.permissions = permissions;
     }

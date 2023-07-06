@@ -1,6 +1,6 @@
 package com.feidian.filter;
 
-import com.feidian.domain.LoginUser;
+import com.feidian.domain.AuthenticatedUser;
 import com.feidian.utils.JwtUtil;
 import com.feidian.utils.RedisCache;
 import io.jsonwebtoken.Claims;
@@ -44,7 +44,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         }
         //从redis中获取用户信息
         String redisKey = "login:" + userid;
-        LoginUser loginUser = redisCache.getCacheObject(redisKey);
+        AuthenticatedUser loginUser = redisCache.getCacheObject(redisKey);
         if(Objects.isNull(loginUser)){
             throw new RuntimeException("用户未登录");
         }
