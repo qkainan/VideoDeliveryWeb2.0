@@ -1,15 +1,15 @@
 package com.feidian.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.feidian.bo.UserBO;
 import com.feidian.domain.AuthenticatedUser;
 import com.feidian.domain.User;
 import com.feidian.dto.LoginDTO;
 import com.feidian.dto.SignupDTO;
 import com.feidian.enums.HttpCodeEnum;
-import com.feidian.po.UserPO;
+import com.feidian.mapper.SecurityUserMapper;
 import com.feidian.responseResult.ResponseResult;
 import com.feidian.service.AuthenticationService;
-import com.feidian.service.SecurityUserService;
 import com.feidian.util.AESUtil;
 import com.feidian.utils.JwtUtil;
 import com.feidian.utils.RedisCache;
@@ -39,7 +39,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private RedisCache redisCache;
 
     @Autowired
-    private SecurityUserService securityUserService;
+    private SecurityUserMapper securityUserMapper;
 
 
     @Transactional
@@ -70,7 +70,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         encryptUserPwd = getEncryptUserPwd(signupDTO.getPassword()).getData().toString();
         UserBO userBO = new UserBO(signupDTO.getUsername(), encryptUserPwd,
                 signupDTO.getNickname(), signupDTO.getEmailAddress());
-        securityUserService.insertUser(userBO);
+
+        //TODO
+        securityUserMapper.insertUser(userBO);
+
         return ResponseResult.successResult(200, "快速注册成功");
     }
 
@@ -114,7 +117,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         String encryptUserPwd = getEncryptUserPwd(signupDTO.getPassword()).getData().toString();
         UserBO userBO = new UserBO(signupDTO.getUsername(), encryptUserPwd,
                 signupDTO.getNickname(), signupDTO.getEmailAddress());
-        securityUserService.insertUser(userBO);
+        //TODO
+        securityUserMapper.insertUser(userBO);
         return ResponseResult.successResult(200, "邮箱注册成功");
     }
 
@@ -125,9 +129,13 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         }
 
         //密码符合要求则开始验证
-        UserPO userPO = securityUserService.findByName(loginDTO.getUsername());
-        Long id01 = userPO.getId();
-        String username01 = userPO.getUsername();
+
+        LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(User::getUsername, loginDTO.getUsername());
+        User user = securityUserMapper.selectOne(queryWrapper);
+
+        Long id01 = user.getId();
+        String username01 = user.getUsername();
 
         if (!StringUtils.hasText(username01)) {
             return ResponseResult.errorResult(403,"用户名不存在");
@@ -147,13 +155,13 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         //获取解密后的密码
         String decryptUserPwd = null;
         try {
-            decryptUserPwd = AESUtil.decryptByAES(userPO.getPassword());
+            decryptUserPwd = AESUtil.decryptByAES(user.getPassword());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
         if (!decryptUserPwd.equals(userPwd)) {
-            userPO.setUserStatus(1L);
+            user.setUserStatus(1L);
             return ResponseResult.errorResult(403,"密码不正确");
         }
 
@@ -162,7 +170,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         map = new HashMap<>();
         String token = JwtUtil.createJWT(UUID.randomUUID().toString(), String.valueOf(id01), null);
         map.put("Authorization", token);
-        userPO.setUserStatus(0L);
+        user.setUserStatus(0L);
 
         return ResponseResult.successResult(map);
     }

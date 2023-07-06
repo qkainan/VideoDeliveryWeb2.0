@@ -1,8 +1,6 @@
 package com.feidian.service.impl;
 
 import com.feidian.bo.UserBO;
-import com.feidian.dto.LoginDTO;
-import com.feidian.dto.SignupDTO;
 import com.feidian.dto.UserDTO;
 import com.feidian.mapper.*;
 import com.feidian.po.*;
@@ -24,7 +22,7 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
-    private UserMapper userMapper;
+    private SecurityUserMapper userMapper;
 
     @Autowired
     private CommodityMapper commodityMapper;

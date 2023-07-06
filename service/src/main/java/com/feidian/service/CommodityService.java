@@ -21,4 +21,6 @@ public interface CommodityService {
     ResponseResult beforeUpdateCommodityInfo(Long commodityId);
 
     ResponseResult viewPerCommodities();
+
+
 }

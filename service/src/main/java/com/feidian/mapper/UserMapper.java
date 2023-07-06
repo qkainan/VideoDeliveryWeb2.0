@@ -10,8 +10,6 @@ import org.springframework.stereotype.Repository;
 @Mapper
 public interface UserMapper {
 
-    void insertUser(UserBO userBO);
-
     UserPO findByName(String username);
 
     void updateUserInfo(UserBO userBO);
