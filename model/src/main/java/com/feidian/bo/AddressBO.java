@@ -1,5 +1,7 @@
 package com.feidian.bo;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,17 +13,17 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class AddressBO {
 
-  private long id;
-  private long userId;
+  private Long id;
+  private Long userId;
   private String addressName;
 
-  private long addressStatus;
+  private Long addressStatus;
 
   private java.sql.Timestamp createTime;
   private java.sql.Timestamp updateTime;
-  private long isDeleted;
+  private Long isDeleted;
 
-  public AddressBO(long id, long userId, String addressName) {
+  public AddressBO(Long id, Long userId, String addressName) {
     this.id = id;
     this.userId = userId;
     this.addressName = addressName;

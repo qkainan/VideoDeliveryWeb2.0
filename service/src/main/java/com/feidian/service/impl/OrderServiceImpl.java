@@ -36,7 +36,7 @@ public class OrderServiceImpl implements OrderService {
 
     //收货
     @Override
-    public ResponseResult receivingCommodity(long orderId) {
+    public ResponseResult receivingCommodity(Long orderId) {
         orderMapper.updateOrderStatus(orderId);
         return ResponseResult.successResult();
     }

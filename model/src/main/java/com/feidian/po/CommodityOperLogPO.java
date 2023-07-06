@@ -1,5 +1,7 @@
 package com.feidian.po;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,9 +11,11 @@ import org.springframework.stereotype.Component;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@TableName(value = "commodity_oper_log")
 public class CommodityOperLogPO {
 
-  private long id;
+  @TableId
+  private Long id;
   private String businessType;
   private String method;
   private String requestMethod;
@@ -19,13 +23,13 @@ public class CommodityOperLogPO {
   private String operUrl;
   private String operParam;
   private String jsonResult;
-  private long status;
+  private Long status;
   private String errorMsg;
 
   private java.sql.Timestamp operTime;
   private java.sql.Timestamp createTime;
   private java.sql.Timestamp updateTime;
-  private long isDeleted;
+  private Long isDeleted;
 
 
 

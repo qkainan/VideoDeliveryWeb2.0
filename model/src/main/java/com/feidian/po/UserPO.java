@@ -1,5 +1,7 @@
 package com.feidian.po;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,9 +11,11 @@ import org.springframework.stereotype.Component;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@TableName(value = "user")
 public class UserPO {
 
-  private long id;
+  @TableId
+  private Long id;
   private String username;
   private String password;
   private String nickname;
@@ -21,11 +25,11 @@ public class UserPO {
   private String userDescription;
   private String emailAddress;
 
-  private long userStatus;
+  private Long userStatus;
 
   private java.sql.Timestamp createTime;
   private java.sql.Timestamp updateTime;
-  private long isDeleted;
+  private Long isDeleted;
 
 
 }

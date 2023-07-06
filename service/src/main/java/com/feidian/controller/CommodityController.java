@@ -31,7 +31,7 @@ public class CommodityController {
     }
 
     @GetMapping("/displayCommodity")
-    public ResponseResult displayCommodity(long commodityId) throws IOException, URISyntaxException {
+    public ResponseResult displayCommodity(Long commodityId) throws IOException, URISyntaxException {
         return commodityService.displayCommodity(commodityId);
     }
 
@@ -41,7 +41,7 @@ public class CommodityController {
     }
 
     @PostMapping("/deleteCommodity")
-    public ResponseResult deleteCommodity(long commodityId){
+    public ResponseResult deleteCommodity(Long commodityId){
         return commodityService.deleteCommodity(commodityId);
     }
 
@@ -52,7 +52,7 @@ public class CommodityController {
 
     //在更新商品信息之前，将已有的信息带上，避免更新部分信息覆盖之前的信息的情况
     @GetMapping("/beforeUpdateCommodityInfo")
-    public ResponseResult beforeUpdateCommodityInfo(long commodityId){
+    public ResponseResult beforeUpdateCommodityInfo(Long commodityId){
         return commodityService.beforeUpdateCommodityInfo(commodityId);
     }
 

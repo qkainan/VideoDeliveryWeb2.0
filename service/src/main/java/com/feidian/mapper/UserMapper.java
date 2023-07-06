@@ -16,5 +16,5 @@ public interface UserMapper {
 
     void updateUserInfo(UserBO userBO);
 
-    UserPO findById(long id);
+    UserPO findById(Long id);
 }

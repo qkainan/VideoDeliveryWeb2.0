@@ -25,7 +25,7 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public ResponseResult deleteAddress(long addressId) {
+    public ResponseResult deleteAddress(Long addressId) {
         addressMapper.deleteAddress(addressId);
         return ResponseResult.successResult();
     }

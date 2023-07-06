@@ -30,14 +30,14 @@ public class JwtUtil {
         // 指定签名的时候使用的签名算法，也就是header那部分
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
         // 生成JWT的时间
-        long nowMillis = System.currentTimeMillis();
+        Long nowMillis = System.currentTimeMillis();
         Date now = new Date(nowMillis);
         //判断是否使用默认超时时间
         if(ttlMillis==null){
             ttlMillis=JwtUtil.JWT_TTL;
         }
         // 设置过期时间
-        long expMillis = nowMillis + ttlMillis;
+        Long expMillis = nowMillis + ttlMillis;
         Date expDate = new Date(expMillis);
         //创建秘钥
         SecretKey secretKey = generalKey();
@@ -86,9 +86,9 @@ public class JwtUtil {
      * @return
      * @throws Exception
      */
-    public static long getSubject(String token) {
+    public static Long getSubject(String token) {
         try {
-            if (!StringUtils.hasText(token)) return 0;
+            if (!StringUtils.hasText(token)) return 0L;
 
             Jws<Claims> claimsJws = Jwts.parser().setSigningKey(generalKey()).parseClaimsJws(token);
             Claims claims = claimsJws.getBody();
@@ -97,17 +97,17 @@ public class JwtUtil {
 
         } catch (Exception e) {
             e.printStackTrace();
-            return 0;
+            return 0L;
         }
     }
 
-    public static long getUserId(){
+    public static Long getUserId(){
         RequestAttributes ra = RequestContextHolder.getRequestAttributes();
         ServletRequestAttributes sra = (ServletRequestAttributes) ra;
         HttpServletRequest req = sra.getRequest();
 
         String token = req.getHeader("Authorization");
-        long userId = JwtUtil.getSubject(token);
+        Long userId = JwtUtil.getSubject(token);
         return userId;
     }
 
