@@ -21,27 +21,21 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.List;
+
 
 
 @RestController
 public class VideoController {
 
     @Autowired
-    private UserService userService;
-
-    @Autowired
     private VideoService videoService;
-
-    @Autowired
-    private CommodityService commodityService;
 
     @Autowired
     private VideoCommodityService videoCommodityService;
 
 
     //上传视频
-    @PostMapping(value = "/uploadCommodity", consumes = "multipart/form-data")
+    @PostMapping(value = "/uploadVideo", consumes = "multipart/form-data")
     public ResponseResult receivingVideo( @RequestPart("uploadVideoVo") VideoDTO receivingVideoDTO,
                                           @RequestPart("dataFile") MultipartFile dataFile,
                                           @RequestPart("coverFile") MultipartFile coverFile){
