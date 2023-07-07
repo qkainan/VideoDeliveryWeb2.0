@@ -14,7 +14,6 @@
         <module>common</module>
         <module>common/common-util</module>
         <module>common/service-util</module>
-        <module>security</module>
     </modules>
 
     <properties>
@@ -34,11 +33,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <!--SpringSecurity-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
         <!--lombok-->
         <dependency>

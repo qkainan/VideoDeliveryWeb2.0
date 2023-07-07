@@ -1,5 +1,6 @@
 package com.feidian.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.feidian.bo.OrderBO;
 import com.feidian.po.Order;
 import org.apache.ibatis.annotations.Mapper;
@@ -9,7 +10,7 @@ import java.util.List;
 
 @Repository
 @Mapper
-public interface OrderMapper {
+public interface OrderMapper extends BaseMapper<Order> {
     void insertOrder(OrderBO orderBO);
 
     void updateOrderStatus(Long orderId);

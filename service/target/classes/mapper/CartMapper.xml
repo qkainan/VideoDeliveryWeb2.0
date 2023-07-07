@@ -9,7 +9,7 @@
         VALUES (#{userId}, #{commodityId}, #{addressId}, #{commodityNum}, #{orderStatus}, ${0});
     </insert>
 
-    <select id="findByUserId" resultType="com.feidian.po.CartPO">
+    <select id="findByUserId" resultType="com.feidian.po.Cart">
         SELECT id,
                user_id,
                commodity_id,
@@ -31,7 +31,7 @@
     </update>
 
 
-    <select id="findByCartId" resultType="com.feidian.po.CartPO">
+    <select id="findByCartId" resultType="com.feidian.po.Cart">
         SELECT id,
                user_id,
                commodity_id,

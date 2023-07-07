@@ -1,6 +1,7 @@
 package com.feidian.domain;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.feidian.po.User;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;

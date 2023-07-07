@@ -3,8 +3,8 @@ package com.feidian.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.feidian.domain.AuthenticatedUser;
-import com.feidian.domain.User;
-import com.feidian.mapper.SecurityUserMapper;
+import com.feidian.mapper.UserMapper;
+import com.feidian.po.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -16,11 +16,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+//认证、授权用ServiceImpl
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    private SecurityUserMapper userMapper;
+    private UserMapper userMapper;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

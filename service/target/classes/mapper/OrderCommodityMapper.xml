@@ -7,7 +7,7 @@
         VALUES (#{orderId}, #{commodityId}, #{commodityNum});
     </insert>
 
-    <select id="findById" resultType="com.feidian.po.OrderCommodityPO">
+    <select id="findById" resultType="com.feidian.po.OrderCommodity">
         SELECT id, order_id, commodity_id, commodity_num, create_time, update_time, is_deleted
         FROM order_commodity
         WHERE id = #{id};

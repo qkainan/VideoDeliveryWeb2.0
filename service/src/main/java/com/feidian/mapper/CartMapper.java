@@ -1,5 +1,6 @@
 package com.feidian.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.feidian.bo.CartBO;
 import com.feidian.po.Cart;
 import org.apache.ibatis.annotations.Mapper;
@@ -10,7 +11,7 @@ import java.util.List;
 
 @Repository
 @Mapper
-public interface CartMapper {
+public interface CartMapper extends BaseMapper<Cart> {
 
     void insertCart(CartBO cartBO);
 

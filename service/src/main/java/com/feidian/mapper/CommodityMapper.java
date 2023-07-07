@@ -1,5 +1,6 @@
 package com.feidian.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.feidian.bo.CommodityBO;
 import com.feidian.po.Commodity;
 import org.apache.ibatis.annotations.Mapper;
@@ -9,7 +10,7 @@ import java.util.List;
 
 @Repository
 @Mapper
-public interface CommodityMapper {
+public interface CommodityMapper extends BaseMapper<Commodity> {
 
     Commodity findByCommodityId(Long commodityId);
 

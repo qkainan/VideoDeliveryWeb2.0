@@ -2,15 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.feidian.mapper.UserMapper">
 
+    <insert id="insertUser" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user (username, password, nickname, email_address, user_status)
+        VALUES (#{username}, #{password}, #{nickname}, #{emailAddress}, ${1})
+    </insert>
 
-
-    <select id="findByName" resultType="com.feidian.po.UserPO">
+    <select id="findByName" resultType="com.feidian.po.User">
         SELECT id, username, password
         FROM user
         WHERE username = #{username};
     </select>
 
-    <select id="findById" resultType="com.feidian.po.UserPO">
+    <select id="findById" resultType="com.feidian.po.User">
         SELECT id,
                username,
                password,

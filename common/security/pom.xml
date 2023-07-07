@@ -3,13 +3,17 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>VideoDeliveryWeb2.0</artifactId>
+        <artifactId>common</artifactId>
         <groupId>com.feidian</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>security</artifactId>
+    <packaging>jar</packaging>
+
+    <name>security</name>
+    <url>http://maven.apache.org</url>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -18,8 +22,11 @@
     </properties>
 
     <dependencies>
-
-
+        <!--SpringSecurity-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.feidian</groupId>
             <artifactId>common-util</artifactId>

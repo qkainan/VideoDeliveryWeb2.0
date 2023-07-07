@@ -3,11 +3,11 @@ package com.feidian.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.feidian.bo.UserBO;
 import com.feidian.domain.AuthenticatedUser;
-import com.feidian.domain.User;
 import com.feidian.dto.LoginDTO;
 import com.feidian.dto.SignupDTO;
 import com.feidian.enums.HttpCodeEnum;
-import com.feidian.mapper.SecurityUserMapper;
+import com.feidian.mapper.UserMapper;
+import com.feidian.po.User;
 import com.feidian.responseResult.ResponseResult;
 import com.feidian.service.AuthenticationService;
 import com.feidian.util.AESUtil;
@@ -29,6 +29,7 @@ import java.util.UUID;
 
 import static com.feidian.enums.HttpCodeEnum.REQUIRE_USERNAME;
 
+//认证、授权用ServiceImpl
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
 
@@ -39,7 +40,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private RedisCache redisCache;
 
     @Autowired
-    private SecurityUserMapper securityUserMapper;
+    private UserMapper userMapper;
 
 
     @Transactional
@@ -72,7 +73,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 signupDTO.getNickname(), signupDTO.getEmailAddress());
 
         //TODO
-        securityUserMapper.insertUser(userBO);
+        userMapper.insertUser(userBO);
 
         return ResponseResult.successResult(200, "快速注册成功");
     }
@@ -118,7 +119,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         UserBO userBO = new UserBO(signupDTO.getUsername(), encryptUserPwd,
                 signupDTO.getNickname(), signupDTO.getEmailAddress());
         //TODO
-        securityUserMapper.insertUser(userBO);
+        userMapper.insertUser(userBO);
         return ResponseResult.successResult(200, "邮箱注册成功");
     }
 
@@ -132,7 +133,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(User::getUsername, loginDTO.getUsername());
-        User user = securityUserMapper.selectOne(queryWrapper);
+        User user = userMapper.selectOne(queryWrapper);
 
         Long id01 = user.getId();
         String username01 = user.getUsername();
