@@ -7,12 +7,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
+
 @Component
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @TableName(value = "user")
-public class User {
+public class User implements Serializable {
 
   @TableId
   private Long id;
