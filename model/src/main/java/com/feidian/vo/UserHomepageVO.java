@@ -1,9 +1,9 @@
 package com.feidian.vo;
 
-import com.feidian.po.CartPO;
-import com.feidian.po.CommodityPO;
-import com.feidian.po.OrderPO;
-import com.feidian.po.VideoPO;
+import com.feidian.po.Cart;
+import com.feidian.po.Commodity;
+import com.feidian.po.Order;
+import com.feidian.po.Video;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,14 +23,14 @@ public class UserHomepageVO {
     private String headUrl;
     private String emailAddress;
 
-    private List<VideoPO> videoPOList;
+    private List<Video> videoPOList;
 
-    private List<CommodityPO> commodityPOList;
+    private List<Commodity> commodityPOList;
 
-    private List<OrderPO> buyerOrderPOList;
+    private List<Order> buyerOrderPOList;
 
-    private List<OrderPO> sellerOrderPOList;
+    private List<Order> sellerOrderPOList;
 
-    private List<CartPO> cartList;
+    private List<Cart> cartList;
 
 }

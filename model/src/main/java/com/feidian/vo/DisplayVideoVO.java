@@ -1,6 +1,6 @@
 package com.feidian.vo;
 
-import com.feidian.po.CommodityPO;
+import com.feidian.po.Commodity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,7 +27,7 @@ public class DisplayVideoVO {
     private java.sql.Timestamp createTime;
 
     //Todo 以后改成VO
-    private List<CommodityPO> commodityPOList;
+    private List<Commodity> commodityPOList;
 
     private byte[] dataResource;
 

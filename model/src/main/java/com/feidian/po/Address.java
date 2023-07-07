@@ -11,24 +11,19 @@ import org.springframework.stereotype.Component;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName(value = "video")
-public class VideoPO {
+@TableName(value = "address")
+public class Address {
 
   @TableId
   private Long id;
   private Long userId;
-  private String videoName;
-  private String videoTitle;
-  private String videoType;
-  private String videoDescription;
-  private String coverUrl;
-  private String dataUrl;
-  private Long videoStatus;
+  private String addressName;
+
+  private Long addressStatus;
 
   private java.sql.Timestamp createTime;
   private java.sql.Timestamp updateTime;
   private Long isDeleted;
-
 
 
 }

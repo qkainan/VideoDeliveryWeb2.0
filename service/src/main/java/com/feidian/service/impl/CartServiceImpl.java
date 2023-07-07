@@ -5,13 +5,11 @@ import com.feidian.bo.OrderBO;
 import com.feidian.dto.CartDTO;
 import com.feidian.dto.PurchaseDTO;
 import com.feidian.mapper.*;
-import com.feidian.po.AddressPO;
-import com.feidian.po.CartPO;
-import com.feidian.po.CommodityPO;
+import com.feidian.po.Address;
+import com.feidian.po.Cart;
+import com.feidian.po.Commodity;
 import com.feidian.responseResult.ResponseResult;
 import com.feidian.service.CartService;
-import com.feidian.service.CommodityService;
-import com.feidian.service.OrderCommodityService;
 import com.feidian.util.JwtUtil;
 import com.feidian.vo.CartVO;
 import org.apache.ibatis.annotations.Mapper;
@@ -41,7 +39,7 @@ public class CartServiceImpl implements CartService {
     @Transactional
     @Override
     public ResponseResult uploadCart(CartDTO cartDTO) {
-        CommodityPO commodityPO = commodityMapper.findByCommodityId(cartDTO.getCommodityId());
+        Commodity commodityPO = commodityMapper.findByCommodityId(cartDTO.getCommodityId());
         Long orderStatus = 0L;
 
         BigDecimal totalPrice = commodityPO.getPrice().multiply(cartDTO.getCommodityNum());
@@ -59,13 +57,13 @@ public class CartServiceImpl implements CartService {
     @Transactional
     @Override
     public ResponseResult displayCartVOList() {
-        List<CartPO> list = cartMapper.findByUserId(JwtUtil.getUserId());
+        List<Cart> list = cartMapper.findByUserId(JwtUtil.getUserId());
         List<CartVO> cartVOList = new ArrayList<>();
 
 
-        for (CartPO cart : list) {
+        for (Cart cart : list) {
 
-            CommodityPO commodityPO = commodityMapper.findByCommodityId(cart.getCommodityId());
+            Commodity commodityPO = commodityMapper.findByCommodityId(cart.getCommodityId());
             BigDecimal totalPrice = commodityPO.getPrice().multiply(cart.getCommodityNum());
 
             CartVO cartVO = new CartVO(cart.getId(), cart.getUserId(), cart.getCommodityId(),
@@ -89,16 +87,16 @@ public class CartServiceImpl implements CartService {
         Long userId = JwtUtil.getUserId();
 
         if (purchaseDTO.getId() != 0) {
-            CartPO cartPO = cartMapper.findByCartId(purchaseDTO.getId());
+            Cart cart = cartMapper.findByCartId(purchaseDTO.getId());
             //orderStatus（1：已购买 0：未购买）
-            cartMapper.updateOrderStatus(cartPO.getId());
-            cartMapper.deleteCart(cartPO.getId());
+            cartMapper.updateOrderStatus(cart.getId());
+            cartMapper.deleteCart(cart.getId());
         }
 
         //状态（5：已收货 4：代发货 3：已发货 1：待发货 0：已退款 ）
         Long orderStatus = 1L;
-        CommodityPO commodityPO = commodityMapper.findByCommodityId(purchaseDTO.getCommodityId());
-        AddressPO address = addressMapper.findByAddressId(purchaseDTO.getAddressId());
+        Commodity commodityPO = commodityMapper.findByCommodityId(purchaseDTO.getCommodityId());
+        Address address = addressMapper.findByAddressId(purchaseDTO.getAddressId());
 
         //Todo order orderCommodity同步更新
         OrderBO orderBO = new OrderBO( userId, commodityPO.getUserId(), address.getAddressName(), orderStatus);

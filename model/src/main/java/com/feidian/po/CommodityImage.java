@@ -11,14 +11,15 @@ import org.springframework.stereotype.Component;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName(value = "order_commodity")
-public class OrderCommodityPO {
+@TableName(value = "commodity_image")
+public class CommodityImage {
 
   @TableId
   private Long id;
-  private Long orderId;
   private Long commodityId;
-  private double commodityNum;
+
+  private String imageUrl;
+  private Long imageStatus;
 
   private java.sql.Timestamp createTime;
   private java.sql.Timestamp updateTime;

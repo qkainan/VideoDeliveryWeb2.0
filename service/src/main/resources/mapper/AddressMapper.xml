@@ -21,7 +21,7 @@
         WHERE id = #{id};
     </update>
 
-    <select id="findByAddressId" resultType="com.feidian.po.AddressPO">
+    <select id="findByAddressId" resultType="com.feidian.po.Address">
         SELECT id, user_id, address_name, address_status, create_time, update_time, is_deleted
         FROM address
         WHERE id = #{addressId};

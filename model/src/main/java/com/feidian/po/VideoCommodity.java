@@ -11,16 +11,16 @@ import org.springframework.stereotype.Component;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName(value = "login_log")
-public class LoginLogPO {
+@TableName(value = "video_commodity")
+public class VideoCommodity {
 
   @TableId
   private Long id;
-  private String username;
-  private Long status;
-  private String msg;
+  private Long userId;
+  private Long videoId;
+  private Long commodityId;
+  private Long videoStatus;
 
-  private java.sql.Timestamp accessTime;
   private java.sql.Timestamp createTime;
   private java.sql.Timestamp updateTime;
   private Long isDeleted;

@@ -13,7 +13,7 @@
         WHERE video_id = #{videoId};
     </update>
 
-    <select id="findByVideoId" resultType="com.feidian.po.VideoCommodityPO">
+    <select id="findByVideoId" resultType="com.feidian.po.VideoCommodity">
         SELECT (id, user_id, video_id, commodity_id, video_status, create_time, update_time, is_deleted)
         FROM video_commodity
         WHERE video_id = #{videoId};

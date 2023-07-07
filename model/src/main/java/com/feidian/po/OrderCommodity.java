@@ -11,22 +11,15 @@ import org.springframework.stereotype.Component;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName(value = "commodity_oper_log")
-public class CommodityOperLogPO {
+@TableName(value = "order_commodity")
+public class OrderCommodity {
 
   @TableId
   private Long id;
-  private String businessType;
-  private String method;
-  private String requestMethod;
-  private String operUserename;
-  private String operUrl;
-  private String operParam;
-  private String jsonResult;
-  private Long status;
-  private String errorMsg;
+  private Long orderId;
+  private Long commodityId;
+  private double commodityNum;
 
-  private java.sql.Timestamp operTime;
   private java.sql.Timestamp createTime;
   private java.sql.Timestamp updateTime;
   private Long isDeleted;

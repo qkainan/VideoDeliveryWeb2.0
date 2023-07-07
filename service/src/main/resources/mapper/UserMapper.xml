@@ -4,13 +4,13 @@
 
 
 
-    <select id="findByName" resultType="com.feidian.po.UserPO">
+    <select id="findByName" resultType="com.feidian.po.User">
         SELECT id, username, password
         FROM user
         WHERE username = #{username};
     </select>
 
-    <select id="findById" resultType="com.feidian.po.UserPO">
+    <select id="findById" resultType="com.feidian.po.User">
         SELECT id,
                username,
                password,

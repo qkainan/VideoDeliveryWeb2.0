@@ -1,7 +1,7 @@
 package com.feidian.mapper;
 
 import com.feidian.bo.CommodityBO;
-import com.feidian.po.CommodityPO;
+import com.feidian.po.Commodity;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -11,7 +11,7 @@ import java.util.List;
 @Mapper
 public interface CommodityMapper {
 
-    CommodityPO findByCommodityId( Long commodityId);
+    Commodity findByCommodityId(Long commodityId);
 
     void insertCommodity(CommodityBO commodityBO);
 
@@ -19,6 +19,6 @@ public interface CommodityMapper {
 
     void updateCommodity(CommodityBO commodityBO);
 
-    List<CommodityPO> findByUserId(Long userId);
+    List<Commodity> findByUserId(Long userId);
 
 }

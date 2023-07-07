@@ -1,7 +1,7 @@
 package com.feidian.mapper;
 
 import com.feidian.bo.OrderBO;
-import com.feidian.po.OrderPO;
+import com.feidian.po.Order;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -14,7 +14,7 @@ public interface OrderMapper {
 
     void updateOrderStatus(Long orderId);
 
-    List<OrderPO> findByBuyerId(Long userId);
+    List<Order> findByBuyerId(Long userId);
 
-    List<OrderPO> findBySellerId(Long userId);
+    List<Order> findBySellerId(Long userId);
 }

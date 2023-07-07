@@ -1,7 +1,7 @@
 package com.feidian.mapper;
 
 import com.feidian.bo.UserBO;
-import com.feidian.po.UserPO;
+import com.feidian.po.User;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -10,9 +10,9 @@ import org.springframework.stereotype.Repository;
 @Mapper
 public interface UserMapper {
 
-    UserPO findByName(String username);
+    User findByName(String username);
 
     void updateUserInfo(UserBO userBO);
 
-    UserPO findById(Long id);
+    User findById(Long id);
 }

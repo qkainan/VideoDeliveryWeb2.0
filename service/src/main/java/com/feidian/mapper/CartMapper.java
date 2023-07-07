@@ -1,7 +1,7 @@
 package com.feidian.mapper;
 
 import com.feidian.bo.CartBO;
-import com.feidian.po.CartPO;
+import com.feidian.po.Cart;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -14,11 +14,11 @@ public interface CartMapper {
 
     void insertCart(CartBO cartBO);
 
-    List<CartPO> findByUserId(Long userId);
+    List<Cart> findByUserId(Long userId);
 
     void deleteCart(Long cartId);
 
-    CartPO findByCartId(Long id);
+    Cart findByCartId(Long id);
 
     void updateOrderStatus(Long id);
 }

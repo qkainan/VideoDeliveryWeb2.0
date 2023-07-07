@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 @AllArgsConstructor
 @TableName(value = "user")
-public class UserPO {
+public class User {
 
   @TableId
   private Long id;

@@ -13,13 +13,13 @@
         WHERE id = #{id};
     </update>
 
-    <select id="findByBuyerId" resultType="com.feidian.po.OrderPO">
+    <select id="findByBuyerId" resultType="com.feidian.po.Order">
         SELECT id, buyer_id, seller_id, address_name, order_status, create_time, update_time, is_deleted
         FROM `order`
         WHERE buyer_id = #{buyerId};
     </select>
 
-    <select id="findBySellerId" resultType="com.feidian.po.OrderPO">
+    <select id="findBySellerId" resultType="com.feidian.po.Order">
         SELECT id, buyer_id, seller_id, address_name, order_status, create_time, update_time, is_deleted
         FROM `order`
         WHERE seller_id = #{sellerId};

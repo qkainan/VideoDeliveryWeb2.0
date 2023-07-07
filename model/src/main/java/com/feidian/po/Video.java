@@ -11,25 +11,24 @@ import org.springframework.stereotype.Component;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName(value = "video_oper_log")
-public class VideoOperLogPO {
+@TableName(value = "video")
+public class Video {
 
   @TableId
   private Long id;
-  private String businessType;
-  private String method;
-  private String requestMethod;
-  private String operUsername;
-  private String operUrl;
-  private String operIp;
-  private String operParam;
-  private String jsonResult;
-  private Long status;
-  private String errorMsg;
+  private Long userId;
+  private String videoName;
+  private String videoTitle;
+  private String videoType;
+  private String videoDescription;
+  private String coverUrl;
+  private String dataUrl;
+  private Long videoStatus;
 
-  private java.sql.Timestamp operTime;
   private java.sql.Timestamp createTime;
   private java.sql.Timestamp updateTime;
   private Long isDeleted;
+
+
 
 }

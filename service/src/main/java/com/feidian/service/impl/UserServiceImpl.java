@@ -69,13 +69,13 @@ public class UserServiceImpl implements UserService {
     public ResponseResult viewUserHomepage() {
         Long userId = JwtUtil.getUserId();
 
-        UserPO userPO = userMapper.findById(userId);
+        User userPO = userMapper.findById(userId);
 
-        List<VideoPO> videoPOList = videoMapper.findByUserId(userId);
-        List<CommodityPO> commodityPOList = commodityMapper.findByUserId(userId);
-        List<OrderPO> buyerOrderVoList = orderMapper.findByBuyerId(userId);
-        List<OrderPO> sellerOrderVoList = orderMapper.findBySellerId(userId);
-        List<CartPO> cartList = cartMapper.findByUserId(userId);
+        List<Video> videoPOList = videoMapper.findByUserId(userId);
+        List<Commodity> commodityPOList = commodityMapper.findByUserId(userId);
+        List<Order> buyerOrderVoList = orderMapper.findByBuyerId(userId);
+        List<Order> sellerOrderVoList = orderMapper.findBySellerId(userId);
+        List<Cart> cartList = cartMapper.findByUserId(userId);
 
         UserHomepageVO userHomepageVo = new UserHomepageVO(userId, userPO.getUsername(),
                 userPO.getUserDescription(), userPO.getPhone(), userPO.getHeadUrl(),

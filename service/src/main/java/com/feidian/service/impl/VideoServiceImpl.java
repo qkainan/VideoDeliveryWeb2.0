@@ -3,10 +3,10 @@ package com.feidian.service.impl;
 import com.feidian.bo.VideoBO;
 import com.feidian.dto.VideoDTO;
 import com.feidian.mapper.*;
-import com.feidian.po.CommodityPO;
-import com.feidian.po.UserPO;
-import com.feidian.po.VideoCommodityPO;
-import com.feidian.po.VideoPO;
+import com.feidian.po.Commodity;
+import com.feidian.po.User;
+import com.feidian.po.VideoCommodity;
+import com.feidian.po.Video;
 import com.feidian.responseResult.ResponseResult;
 import com.feidian.service.VideoService;
 import com.feidian.util.JwtUtil;
@@ -73,14 +73,14 @@ public class VideoServiceImpl implements VideoService {
 
     @Override
     public ResponseResult displayVideo(Long id) throws IOException, URISyntaxException {
-        VideoPO videoPO = videoMapper.findByVideoId(id);
-        UserPO userPO = userMapper.findById(videoPO.getUserId());
+        Video videoPO = videoMapper.findByVideoId(id);
+        User userPO = userMapper.findById(videoPO.getUserId());
 
-        List<VideoCommodityPO> videoCommodityPOList = videoCommodityMapper.findByVideoId(id);
-        List<CommodityPO> commodityPOList = new ArrayList<>();
+        List<VideoCommodity> videoCommodityPOList = videoCommodityMapper.findByVideoId(id);
+        List<Commodity> commodityPOList = new ArrayList<>();
 
-        for (VideoCommodityPO vc: videoCommodityPOList) {
-            CommodityPO byCommodityIdPO = commodityMapper.findByCommodityId(vc.getCommodityId());
+        for (VideoCommodity vc: videoCommodityPOList) {
+            Commodity byCommodityIdPO = commodityMapper.findByCommodityId(vc.getCommodityId());
             commodityPOList.add(byCommodityIdPO);
         }
 
@@ -117,7 +117,7 @@ public class VideoServiceImpl implements VideoService {
     @Override
     public ResponseResult viewPerVideos() {
         Long userId = JwtUtil.getUserId();
-        List<VideoPO> videoPOList = videoMapper.findByUserId(userId);
+        List<Video> videoPOList = videoMapper.findByUserId(userId);
 
         return ResponseResult.successResult(videoPOList);
     }

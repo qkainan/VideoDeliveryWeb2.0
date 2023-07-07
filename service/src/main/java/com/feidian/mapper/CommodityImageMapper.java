@@ -1,6 +1,6 @@
 package com.feidian.mapper;
 
-import com.feidian.po.CommodityImagePO;
+import com.feidian.po.CommodityImage;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -11,6 +11,6 @@ import java.util.List;
 public interface CommodityImageMapper {
     void insertCommodityImage(Long commodityId, String imageUrl, Long imageStatus);
 
-    List<CommodityImagePO> findByCommodityId(Long commodityId);
+    List<CommodityImage> findByCommodityId(Long commodityId);
 
 }

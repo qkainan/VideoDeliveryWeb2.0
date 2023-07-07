@@ -1,7 +1,7 @@
 package com.feidian.mapper;
 
 import com.feidian.bo.VideoCommodityBO;
-import com.feidian.po.VideoCommodityPO;
+import com.feidian.po.VideoCommodity;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -14,6 +14,6 @@ public interface VideoCommodityMapper {
 
     void updateVideoCommodityInfo(VideoCommodityBO videoCommodityBO);
 
-    List<VideoCommodityPO> findByVideoId(Long videoId);
+    List<VideoCommodity> findByVideoId(Long videoId);
 
 }

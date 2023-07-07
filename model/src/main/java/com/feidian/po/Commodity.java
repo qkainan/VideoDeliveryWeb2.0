@@ -7,19 +7,27 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+
 @Component
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName(value = "commodity_image")
-public class CommodityImagePO {
+@TableName(value = "commodity")
+public class Commodity {
 
   @TableId
   private Long id;
-  private Long commodityId;
+  private Long userId;
 
-  private String imageUrl;
-  private Long imageStatus;
+  private String commodityName;
+  private String commodityType;
+  private BigDecimal price;
+  private String commodityDescription;
+  private String commodityAddress;
+  private String coverUrl;
+
+  private Long commodityStatus;
 
   private java.sql.Timestamp createTime;
   private java.sql.Timestamp updateTime;

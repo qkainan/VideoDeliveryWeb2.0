@@ -4,9 +4,9 @@ package com.feidian.service.impl;
 import com.feidian.mapper.CommodityMapper;
 import com.feidian.mapper.OrderCommodityMapper;
 import com.feidian.mapper.OrderMapper;
-import com.feidian.po.CommodityPO;
-import com.feidian.po.OrderCommodityPO;
-import com.feidian.po.OrderPO;
+import com.feidian.po.Commodity;
+import com.feidian.po.OrderCommodity;
+import com.feidian.po.Order;
 import com.feidian.responseResult.ResponseResult;
 import com.feidian.service.OrderService;
 import com.feidian.util.JwtUtil;
@@ -46,10 +46,10 @@ public class OrderServiceImpl implements OrderService {
     public ResponseResult viewPurchaseOrder() {
         List<PurchaseOrderVO> purchaseOrderVoList = new ArrayList<>();
 
-        for (OrderPO o : orderMapper.findByBuyerId(JwtUtil.getUserId())) {
+        for (Order o : orderMapper.findByBuyerId(JwtUtil.getUserId())) {
 
-            OrderCommodityPO orderCommodity = orderCommodityMapper.findById(o.getId());
-            CommodityPO commodityPO = commodityMapper.findByCommodityId(orderCommodity.getCommodityId());
+            OrderCommodity orderCommodity = orderCommodityMapper.findById(o.getId());
+            Commodity commodityPO = commodityMapper.findByCommodityId(orderCommodity.getCommodityId());
 
             PurchaseOrderVO purchaseOrderVo = new PurchaseOrderVO(o.getId(), commodityPO.getCommodityName(), commodityPO.getPrice(),
                     commodityPO.getCommodityAddress(), o.getOrderStatus(), o.getUpdateTime());
@@ -65,10 +65,10 @@ public class OrderServiceImpl implements OrderService {
     public ResponseResult viewSaleOrder() {
         List<SaleOrderVO> saleOrderVoList = new ArrayList<>();
 
-        for (OrderPO o : orderMapper.findBySellerId(JwtUtil.getUserId())) {
+        for (Order o : orderMapper.findBySellerId(JwtUtil.getUserId())) {
 
-            OrderCommodityPO orderCommodity = orderCommodityMapper.findById(o.getId());
-            CommodityPO commodityPO = commodityMapper.findByCommodityId(orderCommodity.getCommodityId());
+            OrderCommodity orderCommodity = orderCommodityMapper.findById(o.getId());
+            Commodity commodityPO = commodityMapper.findByCommodityId(orderCommodity.getCommodityId());
 
             SaleOrderVO saleOrderVo = new SaleOrderVO(o.getId(), commodityPO.getCommodityName(), commodityPO.getPrice(),
                     commodityPO.getCommodityAddress(), o.getOrderStatus(), o.getUpdateTime());

@@ -19,11 +19,7 @@
 
     <dependencies>
 
-        <!--SpringSecurity-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
+
         <dependency>
             <groupId>com.feidian</groupId>
             <artifactId>common-util</artifactId>

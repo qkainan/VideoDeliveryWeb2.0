@@ -7,19 +7,23 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+
 @Component
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName(value = "video_commodity")
-public class VideoCommodityPO {
+@TableName(value = "cart")
+public class Cart {
 
   @TableId
   private Long id;
   private Long userId;
-  private Long videoId;
   private Long commodityId;
-  private Long videoStatus;
+  private Long addressId;
+  private BigDecimal commodityNum;
+
+  private Long orderStatus;
 
   private java.sql.Timestamp createTime;
   private java.sql.Timestamp updateTime;

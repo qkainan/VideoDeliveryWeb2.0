@@ -1,7 +1,6 @@
 package com.feidian.service;
 
 import com.feidian.dto.VideoDTO;
-import com.feidian.po.VideoPO;
 import com.feidian.responseResult.ResponseResult;
 import org.springframework.web.multipart.MultipartFile;
 

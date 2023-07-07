@@ -1,6 +1,6 @@
 package com.feidian.mapper;
 
-import com.feidian.po.OrderCommodityPO;
+import com.feidian.po.OrderCommodity;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
 public interface OrderCommodityMapper {
     void insertOrderCommodity(Long id, Long id1, Long commodityNum);
 
-    OrderCommodityPO findById(Long id);
+    OrderCommodity findById(Long id);
 }

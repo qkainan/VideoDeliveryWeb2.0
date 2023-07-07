@@ -33,7 +33,7 @@
 
 
 
-    <select id="findByVideoId" resultType="com.feidian.po.VideoPO">
+    <select id="findByVideoId" resultType="com.feidian.po.Video">
         SELECT id,
                user_id,
                video_name,
@@ -50,7 +50,7 @@
         WHERE id = #{id};
     </select>
 
-    <select id="findByUserId" resultType="com.feidian.po.VideoPO">
+    <select id="findByUserId" resultType="com.feidian.po.Video">
         SELECT id,
                user_id,
                video_name,

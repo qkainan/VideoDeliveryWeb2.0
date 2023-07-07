@@ -4,15 +4,14 @@ import com.feidian.bo.CommodityBO;
 import com.feidian.dto.CommodityDTO;
 import com.feidian.mapper.CommodityImageMapper;
 import com.feidian.mapper.CommodityMapper;
-import com.feidian.po.CommodityImagePO;
-import com.feidian.po.CommodityPO;
+import com.feidian.po.CommodityImage;
+import com.feidian.po.Commodity;
 import com.feidian.responseResult.ResponseResult;
 import com.feidian.service.CommodityService;
 import com.feidian.util.JwtUtil;
 import com.feidian.util.ReceivingFileUtil;
 import com.feidian.util.UploadingFileUtil;
 import com.feidian.vo.DisplayCommodityVO;
-import io.lettuce.core.dynamic.annotation.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,9 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class CommodityServiceImpl implements CommodityService {
@@ -71,14 +68,14 @@ public class CommodityServiceImpl implements CommodityService {
     @Override
     public ResponseResult displayCommodity(Long commodityId) throws URISyntaxException, IOException {
 
-        CommodityPO commodityPO = commodityMapper.findByCommodityId(commodityId);
+        Commodity commodityPO = commodityMapper.findByCommodityId(commodityId);
 
         if (commodityPO != null) {
 
-            List<CommodityImagePO> commodityImageList = commodityImageMapper.findByCommodityId(commodityId);
+            List<CommodityImage> commodityImageList = commodityImageMapper.findByCommodityId(commodityId);
             List<byte[]> imageResourceList = new ArrayList<>();
             if (commodityImageList != null) {
-                for (CommodityImagePO ci : commodityImageList) {
+                for (CommodityImage ci : commodityImageList) {
                     imageResourceList.add(UploadingFileUtil.getFileImage(ci.getImageUrl()).getFileByte());
                 }
             }
@@ -124,7 +121,7 @@ public class CommodityServiceImpl implements CommodityService {
     @Override
     public ResponseResult viewPerCommodities() {
         Long userId = JwtUtil.getUserId();
-        List<CommodityPO> commodityPOList = commodityMapper.findByUserId(userId);
+        List<Commodity> commodityPOList = commodityMapper.findByUserId(userId);
         return ResponseResult.successResult(commodityPOList);
     }
 

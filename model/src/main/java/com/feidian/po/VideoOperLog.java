@@ -7,28 +7,29 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
-
 @Component
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName(value = "cart")
-public class CartPO {
+@TableName(value = "video_oper_log")
+public class VideoOperLog {
 
   @TableId
   private Long id;
-  private Long userId;
-  private Long commodityId;
-  private Long addressId;
-  private BigDecimal commodityNum;
+  private String businessType;
+  private String method;
+  private String requestMethod;
+  private String operUsername;
+  private String operUrl;
+  private String operIp;
+  private String operParam;
+  private String jsonResult;
+  private Long status;
+  private String errorMsg;
 
-  private Long orderStatus;
-
+  private java.sql.Timestamp operTime;
   private java.sql.Timestamp createTime;
   private java.sql.Timestamp updateTime;
   private Long isDeleted;
-
-
 
 }
