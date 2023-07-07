@@ -28,20 +28,14 @@ import java.util.List;
 public class VideoController {
 
     @Autowired
-    private UserService userService;
-
-    @Autowired
     private VideoService videoService;
-
-    @Autowired
-    private CommodityService commodityService;
 
     @Autowired
     private VideoCommodityService videoCommodityService;
 
 
     //上传视频
-    @PostMapping(value = "/uploadCommodity", consumes = "multipart/form-data")
+    @PostMapping(value = "/uploadVideo", consumes = "multipart/form-data")
     public ResponseResult receivingVideo( @RequestPart("uploadVideoVo") VideoDTO receivingVideoDTO,
                                           @RequestPart("dataFile") MultipartFile dataFile,
                                           @RequestPart("coverFile") MultipartFile coverFile){
