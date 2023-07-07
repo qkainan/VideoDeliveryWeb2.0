@@ -1,7 +1,7 @@
 package com.feidian.filter;
 
 import com.feidian.domain.AuthenticatedUser;
-import com.feidian.utils.JwtUtil;
+import com.feidian.util.JwtUtil;
 import com.feidian.utils.RedisCache;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;

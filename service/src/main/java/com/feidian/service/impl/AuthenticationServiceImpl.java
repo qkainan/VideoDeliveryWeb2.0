@@ -11,7 +11,7 @@ import com.feidian.po.User;
 import com.feidian.responseResult.ResponseResult;
 import com.feidian.service.AuthenticationService;
 import com.feidian.util.AESUtil;
-import com.feidian.utils.JwtUtil;
+import com.feidian.util.JwtUtil;
 import com.feidian.utils.RedisCache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
