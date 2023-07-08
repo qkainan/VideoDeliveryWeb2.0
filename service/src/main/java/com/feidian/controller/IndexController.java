@@ -31,7 +31,6 @@ public class IndexController {
     //快速注册
     @PostMapping("/fastSignup")
     public ResponseResult fastSignup(@RequestBody SignupDTO signupDTO){
-        //Todo 规范性验证放在Controller层，业务性验证放在Service层
         return userService.fastSignup(signupDTO);
     }
 
@@ -44,7 +43,6 @@ public class IndexController {
     //邮箱注册
     @PostMapping("/emailSignup")
     public ResponseResult emailSignup(@RequestBody SignupDTO signupDTO) throws Exception {
-        //Todo 规范性验证放在Controller层，业务性验证放在Service层
         return userService.emailSignup(signupDTO);
     }
 

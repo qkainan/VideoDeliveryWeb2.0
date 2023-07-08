@@ -41,7 +41,6 @@ public class LoginInterceptor implements HandlerInterceptor {
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
                 return false;
             }
-
         return true;
     }
 

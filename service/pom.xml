@@ -61,7 +61,6 @@
             <configuration>
                 <mainClass>com.feidian.ServiceApplication</mainClass>
             </configuration>
-
         </plugin>
     </plugins>
     </build>

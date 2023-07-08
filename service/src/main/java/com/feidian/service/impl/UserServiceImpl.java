@@ -9,8 +9,6 @@ import com.feidian.po.*;
 import com.feidian.responseResult.ResponseResult;
 import com.feidian.service.*;
 import com.feidian.util.*;
-import com.feidian.vo.PurchaseOrderVO;
-import com.feidian.vo.SaleOrderVO;
 import com.feidian.vo.UserHomepageVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
